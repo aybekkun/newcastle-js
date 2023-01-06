@@ -1,0 +1,16 @@
+@import "vars";
+@import "reset";
+@import "global";
+
+/* components */
+@import "components";
+
+/* pages */
+@import "pages/home";
+@import "pages/course";
+@import "pages/register";
+
+/* admin */
+
+/* media queries */
+@import "media";
