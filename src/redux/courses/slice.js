@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCourses } from "./asyncActions";
+import {fetchCourse, fetchCourses} from "./asyncActions";
 const initialState = {
   data: [],
+  course:{}
 };
 
 export const coursesSlice = createSlice({
@@ -15,6 +16,9 @@ export const coursesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchCourses.fulfilled, (state, action) => {
       state.data = action.payload.data;
+    });
+    builder.addCase(fetchCourse.fulfilled, (state, action) => {
+      state.course = action.payload.data;
     });
   },
 });

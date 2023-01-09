@@ -3,6 +3,7 @@ import cls from "classnames";
 import { Link } from "react-router-dom";
 
 const NavAccordion = ({ name, link, active, icon, children }) => {
+
   let navIcon;
   switch (icon) {
     case "general":

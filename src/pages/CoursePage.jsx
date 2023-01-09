@@ -2,8 +2,28 @@ import React from "react";
 import Aside from "../components/PublicComponents/Sections/Aside";
 import Comments from "../components/PublicComponents/Comments";
 import CourseInfo from "../components/PublicComponents/Sections/CourseInfo";
+import { Outlet, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { fetchMaterials } from "../redux/lessons/asyncActions";
+import Blocks from "editorjs-blocks-react-renderer";
 const CoursePage = () => {
+  const { course } = useSelector((state) => state.courses);
+  const { blocks } = useSelector((state) => state.lessons);
+  const dispatch = useDispatch();
+
+  const { id, courseId } = useParams();
   const [activeTab, setActiveTab] = React.useState(0);
+
+  React.useEffect(() => {
+    const cancelToken = axios.CancelToken.source();
+    (async function () {
+      await dispatch(fetchMaterials({ id: courseId, cancelToken: cancelToken.token }));
+    })();
+    return () => {
+      cancelToken.cancel();
+    };
+  }, [courseId, dispatch]);
   return (
     <>
       <div className="container">
@@ -12,6 +32,7 @@ const CoursePage = () => {
             <div className="wrapper__title-box">
               <h3 className="subtitle wrapper__subtitle">Kurslar</h3>
               <h2 className="title wrapper__title">Boshlang’ich ingliz tili kursi</h2>
+              <Outlet />
             </div>
             <div className="wrapper__video-box">
               <iframe
@@ -29,10 +50,7 @@ const CoursePage = () => {
                 <li onClick={() => setActiveTab(0)} data-tab="1" className="tabs__list-item">
                   Kurs malumot
                 </li>
-                <li onClick={() => setActiveTab(1)} data-tab="2" className="tabs__list-item">
-                  Dars yozma matni
-                </li>
-                <li onClick={() => setActiveTab(2)} data-tab="3" className="tabs__list-item">
+                <li onClick={() => setActiveTab(1)} data-tab="3" className="tabs__list-item">
                   Kommentariya
                 </li>
               </ul>
@@ -40,93 +58,19 @@ const CoursePage = () => {
             <div className="tab-content wrapper__desc-box">
               {activeTab === 0 && (
                 <div data-tab-index="1" className="wrapper__desc" id="tab-1">
-                  <h3>Ingliz tilini 0 dan mukammal o’rganing!</h3>
-                  <p>
-                    Volutpat aliquet eu ut nunc risus massa tortor mattis. Tellus tellus viverra mauris dictum
-                    suspendisse mi id. Congue ac at dictum vulputate a pellentesque pretium at. Consectetur sodales orci
-                    pharetra venenatis ut enim facilisi ornare. Tincidunt nam sed in proin ornare id a accumsan
-                    maecenas. Odio lobortis duis molestie sagittis euismod eget. Facilisi arcu aliquet adipiscing neque.
-                    Viverra elit morbi adipiscing aliquet dignissim. Congue enim sit nulla ornare neque. Massa lectus
-                    dui rhoncus ac tempor quis sagittis purus. Arcu sit lorem at placerat vestibulum vehicula. Neque
-                    eget massa euismod est quis nibh a. Ullamcorper massa aliquet dignissim commodo ullamcorper posuere
-                    pharetra hac. Ipsum sit augue sit convallis mattis turpis potenti ante aliquam. Semper eu ut ac erat
-                    nunc dignissim scelerisque cras. Eget massa purus adipiscing tincidunt. Sit suspendisse ac viverra
-                    eget.
-                  </p>
-                  <img src="images/course.jpg" alt="Course" />
-                  <h3>Ushbu kursning loyihasi nima?</h3>
-                  <p>
-                    Volutpat aliquet eu ut nunc risus massa tortor mattis. Tellus tellus viverra mauris dictum
-                    suspendisse mi id. Congue ac at dictum vulputate a pellentesque pretium at. Consectetur sodales orci
-                    pharetra venenatis ut enim facilisi ornare. Tincidunt nam sed in proin ornare id a accumsan
-                    maecenas.
-                  </p>
-                  <h3>Bu onlayn kurs kimlar uchun?</h3>
-                  <p>
-                    Volutpat aliquet eu ut nunc risus massa tortor mattis. Tellus tellus viverra mauris dictum
-                    suspendisse mi id. Congue ac at dictum vulputate a pellentesque pretium at. Consectetur sodales orci
-                    pharetra venenatis ut enim facilisi ornare. Tincidunt nam sed in proin ornare id a accumsan
-                    maecenas.
-                  </p>
-                  <h3>Talablar va materiallar</h3>
-                  <p>
-                    Volutpat aliquet eu ut nunc risus massa tortor mattis. Tellus tellus viverra mauris dictum
-                    suspendisse mi id. Congue ac at dictum vulputate a pellentesque pretium at. Consectetur sodales orci
-                    pharetra venenatis ut enim facilisi ornare. Tincidunt nam sed in proin ornare id a accumsan
-                    maecenas.
-                  </p>
-                  <img src="images/course.jpg" alt="Course" />
-                  <CourseInfo />
-                </div>
-              )}
+                  {courseId !== 0 ? <Blocks data={blocks} /> : <h2>Нет данных</h2>}
 
-              {activeTab === 1 && (
-                <div data-tab-index="2" className="wrapper__desc" id="tab-2">
-                  <h3>Maecenas id in aliquam volutpat.</h3>
-                  <p>
-                    Volutpat aliquet eu ut nunc risus massa tortor mattis. Tellus tellus viverra mauris dictum
-                    suspendisse mi id. Congue ac at dictum vulputate a pellentesque pretium at. Consectetur sodales orci
-                    pharetra venenatis ut enim facilisi ornare. Tincidunt nam sed in proin ornare id a accumsan
-                    maecenas. Odio lobortis duis molestie sagittis euismod eget. Facilisi arcu aliquet adipiscing neque.
-                    Viverra elit morbi adipiscing aliquet dignissim. Congue enim sit nulla ornare neque. Massa lectus
-                    dui rhoncus ac tempor quis sagittis purus. Arcu sit lorem at placerat vestibulum vehicula. Neque
-                    eget massa euismod est quis nibh a. Ullamcorper massa aliquet dignissim commodo ullamcorper posuere
-                    pharetra hac. Ipsum sit augue sit convallis mattis turpis potenti ante aliquam. Semper eu ut ac erat
-                    nunc dignissim scelerisque cras. Eget massa purus adipiscing tincidunt. Sit suspendisse ac viverra
-                    eget.
-                  </p>
-                  <img src="images/course.jpg" alt="" />
-                  <h3>Urna habitasse imperdiet</h3>
-                  <p>
-                    Volutpat aliquet eu ut nunc risus massa tortor mattis. Tellus tellus viverra mauris dictum
-                    suspendisse mi id. Congue ac at dictum vulputate a pellentesque pretium at. Consectetur sodales orci
-                    pharetra venenatis ut enim facilisi ornare. Tincidunt nam sed in proin ornare id a accumsan
-                    maecenas.
-                  </p>
-                  <h3>Quam pharetra aliquam eget</h3>
-                  <p>
-                    Volutpat aliquet eu ut nunc risus massa tortor mattis. Tellus tellus viverra mauris dictum
-                    suspendisse mi id. Congue ac at dictum vulputate a pellentesque pretium at. Consectetur sodales orci
-                    pharetra venenatis ut enim facilisi ornare. Tincidunt nam sed in proin ornare id a accumsan
-                    maecenas.
-                  </p>
-                  <h3>Lacus et viverra</h3>
-                  <p>
-                    Volutpat aliquet eu ut nunc risus massa tortor mattis. Tellus tellus viverra mauris dictum
-                    suspendisse mi id. Congue ac at dictum vulputate a pellentesque pretium at. Consectetur sodales orci
-                    pharetra venenatis ut enim facilisi ornare. Tincidunt nam sed in proin ornare id a accumsan
-                    maecenas.
-                  </p>
+                  {Number(courseId) === 1 && <CourseInfo />}
                 </div>
               )}
-              {activeTab === 2 && (
+              {activeTab === 1 && (
                 <div data-tab-index="3" className="wrapper__desc" id="tab-3">
                   <Comments />
                 </div>
               )}
             </div>
           </div>
-          <Aside />
+          <Aside id={id} />
         </div>
       </div>
     </>

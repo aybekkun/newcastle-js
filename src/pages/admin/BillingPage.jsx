@@ -1,9 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import Editer from "../../components/Editer"
 const BillingPage = () => {
   return (
-    <div>BillingPage</div>
-  )
-}
+    <div>
+      <Editer />
+    </div>
+  );
+};
 
-export default BillingPage
+export default BillingPage;

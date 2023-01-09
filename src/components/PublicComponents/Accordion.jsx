@@ -4,10 +4,9 @@ import cls from "classnames";
 import arrowIcon from "../../assets/icons/arrow.svg";
 import useActive from "../../hooks/useActive.hook";
 
-
-
-const Accordion = ({ title = "Lesson", children }) => {
+const Accordion = ({ title = "Lesson", children, isActive }) => {
   const { active, handleChangeActive } = useActive();
+  
   return (
     <div className={cls("accordion", { active: active })}>
       <div onClick={handleChangeActive} className="accordion__label">

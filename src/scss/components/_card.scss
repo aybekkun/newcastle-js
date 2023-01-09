@@ -2,6 +2,11 @@
     display: grid;
     grid-template-columns: repeat(4, 285px);
     grid-gap: 20px;
+  &__image-box{
+    img{
+      border-radius: 10px;
+    }
+  }
     &__item {
       display: flex;
       flex-direction: column;

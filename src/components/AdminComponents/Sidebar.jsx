@@ -6,7 +6,6 @@ import NavAccordion from "./NavAccordion";
 const Sidebar = () => {
   const location = useLocation();
   const pathname = location.pathname.split("/")[2];
-  console.log(pathname);
 
   return (
     <div className="sidebar">

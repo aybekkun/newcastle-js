@@ -1,14 +1,27 @@
 import React from "react";
 import playIcon from "../../assets/icons/play.svg";
-
-const AccordionItem = ({ title = "Lesson" }) => {
+import { NavLink } from "react-router-dom";
+const AccordionItem = ({ title = "Lesson", link }) => {
+  const onToScroll = ()=>{
+    window.scrollTo(0,0);
+  }
+  if (!link) {
+    return (
+      <div className="accordion__item">
+        <div className="accordion__item-box">
+          {/*<img src={playIcon} className="accordion__item-img" alt="Item" />*/}
+          <span>{title}</span>
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="accordion__item">
+    <NavLink onClick={onToScroll} to={`${link}`} className={({ isActive }) => (isActive ? "active accordion__item" : "accordion__item")}>
       <div className="accordion__item-box">
-        <img src={playIcon} className="accordion__item-img" alt="Item" />
+        {/*<img src={playIcon} className="accordion__item-img" alt="Item" />*/}
         <span>{title}</span>
       </div>
-    </div>
+    </NavLink>
   );
 };
 

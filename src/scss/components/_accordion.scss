@@ -9,6 +9,11 @@
         padding-left: 10px;
       }
     }
+
+    // &__item{
+    //   opacity: 0;
+    //   max-height: 0;
+    // }
     &__label {
       font-weight: 500;
       font-size: 16px;
@@ -27,6 +32,7 @@
       transition: transform 0.3s ease;
     }
     &__content {
+      display: none;
       max-height: 0;
       opacity: 0;
       background-color: #fff;
@@ -35,6 +41,7 @@
     &.active {
       max-height: 100%;
       & > .accordion__content {
+        display: block;
         max-height: 100%;
         opacity: 1;
       }
@@ -48,6 +55,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      &.active{
+        background-color: #00bcf1;
+        color: #fff;
+      }
     }
     &__item-box {
       display: flex;

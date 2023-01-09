@@ -1,42 +1,40 @@
 import { Button, Space } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import cardImg from "../../assets/card.jpg";
 import clockIcon from "../../assets/icons/clock.svg";
 import listIcon from "../../assets/icons/list.svg";
 import starIcon from "../../assets/icons/star.svg";
 import userIcon from "../../assets/icons/user.svg";
 
-const Card = () => {
+const Card = ({ id, secondId, title, description, image, price, lessons }) => {
   const location = useLocation();
   const pathname = location.pathname.split("/")[1];
-
+  const navigate = useNavigate();
+  console.log(image);
   return (
     <>
       <div className="card__item-box">
-        <Link to="/course" className="card__item">
+        <Link to={`/course/${id}/${secondId ? secondId : 0}`} className="card__item">
           <div className="card__image-box">
-            <img src={cardImg} alt="Card" />
+            <img src={image ? `http://yusupog4.beget.tech/public/images/${image}` : cardImg} alt="Card" />
           </div>
           <div className="card__desc-box">
-            <h3 className="card__title">Ut vitae leo tortor lectus nullam quisque mauris arcu scelerisque.</h3>
-            <p className="card__desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam perspiciatis ducimus corporis est vel
-              eligendi enim nemo totam quae illum repellat, autem beatae? Doloribus dignissimos non expedita a iusto at!
-            </p>
+            <h3 className="card__title">{title}</h3>
+            <p className="card__desc">{description}</p>
           </div>
           <div className="card__info-box">
             <div className="card__time-box">
-              <div className="card__time">
-                <img src={clockIcon} alt="Clock" />
-                <span>00:50:45 Hours</span>
-              </div>
+              {/*<div className="card__time">*/}
+              {/*  <img src={clockIcon} alt="Clock" />*/}
+              {/*  <span>00:50:45 Hours</span>*/}
+              {/*</div>*/}
               <div className="card__lessons">
                 <img src={listIcon} alt="List" />
-                <span>15 Lessons</span>
+                <span>{lessons} Lessons</span>
               </div>
             </div>
             <div className="card__price-box">
-              <p className="card__price">$30</p>
+              <p className="card__price">{price} uzs</p>
               <div className="card__rating">
                 <img src={starIcon} alt="Rate" />
                 <span>1,235</span>
@@ -56,7 +54,7 @@ const Card = () => {
             <Button type="primary" size="small">
               Edit
             </Button>
-            <Button type="primary" size="small">
+            <Button onClick={() => navigate(`lesson/${id}`)} type="primary" size="small">
               Add
             </Button>
           </Space>
