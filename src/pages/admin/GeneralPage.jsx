@@ -24,7 +24,7 @@ const GeneralPage = () => {
   const onDeleteCourse = async (id) => {
     if (window.confirm("Delete Course ?")) {
       await dispatch(deleteCourse({ id }));
-      await dispatch(fetchCourses());
+      await dispatch(fetchCourses({}));
       console.log(id);
     }
   };

@@ -12,6 +12,7 @@ import SettingsPage from "../pages/admin/SettingsPage";
 import StatistikaPage from "../pages/admin/StatistikaPage";
 import CoursePage from "../pages/CoursePage";
 import HomePage from "../pages/HomePage";
+import NotFound from "../pages/NotFound";
 import PopularPage from "../pages/PopularPage";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
@@ -42,6 +43,7 @@ const Routing = () => {
             <Route path=":id" element={<LessonAddPage />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
