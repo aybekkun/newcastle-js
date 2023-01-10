@@ -34,7 +34,7 @@ const CoursePage = () => {
               <h3 className="subtitle wrapper__subtitle">Kurslar</h3>
               <div className="wrapper__title-inner">
                 {blocks.length > 0 ? <ShowEditer blocks={[blocks[0]]} /> : <h2>Нет материалов</h2>}
-                {blocks.length > 0 && <ShowEditer blocks={[blocks[1]]} />}
+                {blocks.length > 1 && <ShowEditer blocks={[blocks[1]]} />}
               </div>
             </div>
             <div className="tabs">

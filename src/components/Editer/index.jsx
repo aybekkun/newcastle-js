@@ -12,7 +12,9 @@ import Quote from "@editorjs/quote";
 import SimpleImage from "@editorjs/simple-image";
 import Table from "@editorjs/table";
 import YoutubeEmbed from "editorjs-youtube-embed";
+//import Audio from "audio-editor-js";
 import React from "react";
+import axios from "axios";
 const Editer = ({ handleSaveData }) => {
   React.useEffect(() => {
     const editor = new EditorJS({
@@ -28,7 +30,7 @@ const Editer = ({ handleSaveData }) => {
           config: {
             endpoints: {
               byFile: "https://intuza.karsoft.uz/api/v1/upload", // Your backend file uploader endpoint
-              byUrl: "https://intuza.karsoft.uz/api/v1/images", // Your endpoint that provides uploading by Url
+              byUrl: "https://intuza.karsoft.uz/public/images", // Your endpoint that provides uploading by Url
             },
           },
         },
@@ -40,6 +42,25 @@ const Editer = ({ handleSaveData }) => {
         inlineCode: InlineCode,
         simpleImage: SimpleImage,
         youtubeEmbed: YoutubeEmbed,
+        // audio: {
+        //   class: Audio,
+        //   config: {
+        //     token: `Bearer ${localStorage.getItem("token")}`,
+        //     route: "https://intuza.karsoft.uz/api/v1/upload",
+        //     routeDelete: `https://intuza.karsoft.uz/public/storage/files`,
+        //     saveServer: async (file) => {
+        //       try {
+        //         let formData = new FormData();
+        //         formData.append("audio", file);
+        //         let req = await axios.post("https://intuza.karsoft.uz/api/v1/upload", formData);
+               
+        //         return req.data;
+        //       } catch (e) {
+        //         console.error(e);
+        //       }
+        //     },
+        //   },
+        // },
       },
       async onChange() {
         const { blocks } = await editor.save();

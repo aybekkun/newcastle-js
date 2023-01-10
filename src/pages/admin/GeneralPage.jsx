@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Card from "../../components/PublicComponents/Card";
-import { fetchCourses } from "../../redux/courses/asyncActions";
+import { deleteCourse, fetchCourses } from "../../redux/courses/asyncActions";
 
 const GeneralPage = () => {
   const navigate = useNavigate();
@@ -20,6 +20,14 @@ const GeneralPage = () => {
       cancelToken.cancel();
     };
   }, []);
+
+  const onDeleteCourse = async (id) => {
+    if (window.confirm("Delete Course ?")) {
+      await dispatch(deleteCourse({ id }));
+      await dispatch(fetchCourses());
+      console.log(id);
+    }
+  };
   return (
     <>
       <Button onClick={() => navigate("addcourse")} style={{ marginBottom: "10px" }}>
@@ -27,7 +35,17 @@ const GeneralPage = () => {
       </Button>
       <div className="general">
         {data.map((item) => (
-          <Card key={item.id} secondId={item.sub_lesson_2s_id}  title={item.title} id={item.id} price={item.price} image={item.image} description={item.description} lessons={item.lessons}/>
+          <Card
+            key={item.id}
+            secondId={item.sub_lesson_2s_id}
+            title={item.title}
+            id={item.id}
+            price={item.price}
+            image={item.image}
+            description={item.description}
+            lessons={item.lessons}
+            onDelete={onDeleteCourse}
+          />
         ))}
       </div>
     </>

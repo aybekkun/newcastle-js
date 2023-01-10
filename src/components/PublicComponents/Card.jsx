@@ -6,17 +6,17 @@ import listIcon from "../../assets/icons/list.svg";
 import starIcon from "../../assets/icons/star.svg";
 import userIcon from "../../assets/icons/user.svg";
 
-const Card = ({ id, secondId, title, description, image, price, lessons }) => {
+const Card = ({ id, secondId, title, description, image, price, lessons, onDelete = () => undefined }) => {
   const location = useLocation();
   const pathname = location.pathname.split("/")[1];
   const navigate = useNavigate();
-  console.log(image);
+
   return (
     <>
       <div className="card__item-box">
         <Link to={`/course/${id}/${secondId ? secondId : 0}`} className="card__item">
           <div className="card__image-box">
-            <img src={image ? `http://yusupog4.beget.tech/public/images/${image}` : cardImg} alt="Card" />
+            <img src={image ? `https://intuza.karsoft.uz/public/images/${image}` : cardImg} alt="Card" />
           </div>
           <div className="card__desc-box">
             <h3 className="card__title">{title}</h3>
@@ -48,7 +48,7 @@ const Card = ({ id, secondId, title, description, image, price, lessons }) => {
         </Link>
         {pathname === "admin" && (
           <Space className="card__buttons" style={{ marginTop: "10px" }}>
-            <Button danger type="primary" size="small">
+            <Button onClick={()=>onDelete(id)} danger type="primary" size="small">
               Delete
             </Button>
             <Button type="primary" size="small">

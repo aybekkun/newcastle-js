@@ -49,17 +49,30 @@ const Output = ({ block }) => {
     case "checklist":
       return (
         <div className="test">
-          {block.data.items.map((item) => (
-            <label key={item}>
+          {block.data.items.map((item, i) => (
+            <label key={i}>
               <input type="radio" name="q-1" />
-              <span class="checkmark"></span>
-              <span class="checkmark__text">{item.text}</span>
+              <span className="checkmark"></span>
+              <span className="checkmark__text">{item.text}</span>
             </label>
           ))}
         </div>
       );
     case "table":
-      return <TableOutput data={block.data} />;
+      return (
+        <table border={1}>
+          {block.data.content.map((tr, i) => (
+            <tr key={i}>
+              {tr.map((td, i) => (
+                <td style={{ minWidth: "100px", padding: "8px 15px", borderRadius: "2px", textAlign: "left" }} key={i}>
+                  {td}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </table>
+      );
+
     default:
       console.log("Unknown block type", block.type);
       break;
