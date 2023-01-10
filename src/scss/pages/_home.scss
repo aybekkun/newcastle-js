@@ -1,6 +1,6 @@
 .top {
   background-color: #70e6e8;
-  background-image: url("../images/top-bg.svg");
+  background-image: url("../../../src/assets/top-bg.svg");
   background-repeat: no-repeat;
   background-position: top -80px right;
   background-size: contain;
@@ -75,7 +75,7 @@
 .why {
   padding: 80px 0 270px;
   background-color: #f1fdff;
-  background-image: url("../images/why-bg.svg");
+  background-image: url("../../../src/assets/why-bg.svg");
   background-repeat: no-repeat;
   background-position: left top 149px;
   background-size: contain;
@@ -168,7 +168,7 @@
       position: absolute;
       width: 1.25em;
       height: 1.25em;
-      background-image: url("./images/icons/check-advantages.svg");
+      background-image: url("../../../src/assets/icons/check-advantages.svg");
       background-size: cover;
       background-repeat: no-repeat;
       left: 0;
@@ -285,7 +285,7 @@
 .pencil {
   position: relative;
   height: 380px;
-  background-image: url("../images/pencil.jpg");
+  background-image: url("../../../src/assets/pencil.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 

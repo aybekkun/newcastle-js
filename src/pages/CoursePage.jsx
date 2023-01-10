@@ -1,16 +1,15 @@
-import React from "react";
-import Aside from "../components/PublicComponents/Sections/Aside";
-import Comments from "../components/PublicComponents/Comments";
-import CourseInfo from "../components/PublicComponents/Sections/CourseInfo";
-import { Outlet, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { fetchMaterials } from "../redux/lessons/asyncActions";
-import Blocks from "editorjs-blocks-react-renderer";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import ShowEditer from "../components/Editer/ShowEditer";
+import Comments from "../components/PublicComponents/Comments";
+import Aside from "../components/PublicComponents/Sections/Aside";
+import CourseInfo from "../components/PublicComponents/Sections/CourseInfo";
+import { fetchMaterials } from "../redux/lessons/asyncActions";
 const CoursePage = () => {
-  const { course } = useSelector((state) => state.courses);
   const { blocks } = useSelector((state) => state.lessons);
+  console.log(blocks);
   const dispatch = useDispatch();
 
   const { id, courseId } = useParams();
@@ -19,6 +18,7 @@ const CoursePage = () => {
   React.useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     (async function () {
+      // await dispatch(fetchCourse({ id: id, cancelToken: cancelToken.token }))
       await dispatch(fetchMaterials({ id: courseId, cancelToken: cancelToken.token }));
     })();
     return () => {
@@ -32,19 +32,10 @@ const CoursePage = () => {
           <div className="wrapper__inner">
             <div className="wrapper__title-box">
               <h3 className="subtitle wrapper__subtitle">Kurslar</h3>
-              <h2 className="title wrapper__title">Boshlang’ich ingliz tili kursi</h2>
-              <Outlet />
-            </div>
-            <div className="wrapper__video-box">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/Pj5SlLWFFHY"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              <div className="wrapper__title-inner">
+                {blocks.length > 0 ? <ShowEditer blocks={[blocks[0]]} /> : <h2>Нет материалов</h2>}
+                {blocks.length > 0 && <ShowEditer blocks={[blocks[1]]} />}
+              </div>
             </div>
             <div className="tabs">
               <ul id="tabs-nav" className="tabs__list">
@@ -59,8 +50,7 @@ const CoursePage = () => {
             <div className="tab-content wrapper__desc-box">
               {activeTab === 0 && (
                 <div data-tab-index="1" className="wrapper__desc" id="tab-1">
-                  {courseId !== 0 && blocks.blocks? <Blocks data={blocks} /> : <h2>Нет данных</h2>} 
- {/*                {courseId !== 0 && blocks ? <ShowEditer blocks={blocks} /> : <h2>Нет данных</h2>} */}
+                  {blocks.length > 0 ? <ShowEditer blocks={blocks.slice(2)} /> : <h2>Нет данных</h2>}
                   {Number(courseId) === 1 && <CourseInfo />}
                 </div>
               )}

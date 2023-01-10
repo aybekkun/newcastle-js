@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchMaterials} from "./asyncActions";
 const initialState = {
-  blocks:{},
+  blocks:[],
   lesson: {},
   isLoading:false,
 };
@@ -24,7 +24,7 @@ export const coursesSlice = createSlice({
     builder.addCase(fetchMaterials.rejected, (state, action) => {
       state.isLoading = false;
       state.lesson = {};
-      state.blocks = {};
+      state.blocks = [];
     });
   },
 });
