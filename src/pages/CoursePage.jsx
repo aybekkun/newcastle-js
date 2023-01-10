@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { fetchMaterials } from "../redux/lessons/asyncActions";
 import Blocks from "editorjs-blocks-react-renderer";
+import ShowEditer from "../components/Editer/ShowEditer";
 const CoursePage = () => {
   const { course } = useSelector((state) => state.courses);
   const { blocks } = useSelector((state) => state.lessons);
@@ -58,8 +59,8 @@ const CoursePage = () => {
             <div className="tab-content wrapper__desc-box">
               {activeTab === 0 && (
                 <div data-tab-index="1" className="wrapper__desc" id="tab-1">
-                  {courseId !== 0 ? <Blocks data={blocks} /> : <h2>Нет данных</h2>}
-
+                  {courseId !== 0 && blocks.blocks? <Blocks data={blocks} /> : <h2>Нет данных</h2>} 
+ {/*                {courseId !== 0 && blocks ? <ShowEditer blocks={blocks} /> : <h2>Нет данных</h2>} */}
                   {Number(courseId) === 1 && <CourseInfo />}
                 </div>
               )}

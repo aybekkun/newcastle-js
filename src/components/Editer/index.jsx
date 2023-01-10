@@ -53,8 +53,8 @@ const Editer = ({onSendData, handleSaveData}) => {
                         class: ImageTool,
                         config: {
                             endpoints: {
-                                byFile: "http://Yusupog4.beget.tech/api/v1/upload", // Your backend file uploader endpoint
-                                byUrl: "http://yusupog4.beget.tech/public/images", // Your endpoint that provides uploading by Url
+                                byFile: "https://intuza.karsoft.uz/api/v1/upload", // Your backend file uploader endpoint
+                                byUrl: "https://intuza.karsoft.uz/api/v1/images", // Your endpoint that provides uploading by Url
                             },
                         },
                     },
