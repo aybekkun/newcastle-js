@@ -25,22 +25,21 @@ const Routing = () => {
           <Route path="/course" element={<CoursePage />}>
             <Route path="/course/:id/:courseId" element={<Course />} />
           </Route>
-
-          <Route path="/signin" element={<RegisterLayout />}>
-            <Route index element={<SignIn />} />
-          </Route>
-          <Route path="/signup" element={<RegisterLayout />}>
-            <Route index element={<SignUp />} />
-          </Route>
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<GeneralPage />} />
-            <Route path="settings" element={<SettingsPage />} />
-            <Route path="statistika" element={<StatistikaPage />} />
-            <Route path="billing" element={<BillingPage />} />
-            <Route path="addcourse" element={<AddCoursePage />} />
-            <Route path="lesson" element={<LessonAddPage />}>
-              <Route path=":id" element={<LessonAddPage />} />
-            </Route>
+        </Route>
+        <Route path="/signin" element={<RegisterLayout />}>
+          <Route index element={<SignIn />} />
+        </Route>
+        <Route path="/signup" element={<RegisterLayout />}>
+          <Route index element={<SignUp />} />
+        </Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<GeneralPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="statistika" element={<StatistikaPage />} />
+          <Route path="billing" element={<BillingPage />} />
+          <Route path="addcourse" element={<AddCoursePage />} />
+          <Route path="lesson" element={<LessonAddPage />}>
+            <Route path=":id" element={<LessonAddPage />} />
           </Route>
         </Route>
       </Routes>

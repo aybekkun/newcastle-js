@@ -14,62 +14,98 @@ import { Button } from "antd";
 import YoutubeEmbed from "editorjs-youtube-embed";
 import React from "react";
 import { createReactEditorJS } from "react-editor-js";
-import { useDispatch } from "react-redux";
+import EditorJS from "@editorjs/editorjs";
+const Editer = ({ handleSaveData }) => {
+  React.useEffect(() => {
+    const editor = new EditorJS({
+      holder: "editer",
+      tools: {
+        embed: Embed,
+        table: Table,
+        marker: Marker,
+        list: List,
+        linkTool: LinkTool,
+        image: {
+          class: ImageTool,
+          config: {
+            endpoints: {
+              byFile: "https://intuza.karsoft.uz/api/v1/upload", // Your backend file uploader endpoint
+              byUrl: "https://intuza.karsoft.uz/api/v1/images", // Your endpoint that provides uploading by Url
+            },
+          },
+        },
 
-const Editer = ({onSendData, handleSaveData}) => {
+        header: Header,
+        quote: Quote,
+        checklist: CheckList,
+        delimiter: Delimiter,
+        inlineCode: InlineCode,
+        simpleImage: SimpleImage,
+        youtubeEmbed: YoutubeEmbed,
+      },
+      async onChange() {
+        const { blocks } = await editor.save();
+        handleSaveData(blocks);
+      },
+    });
 
-    const editorCore = React.useRef(null);
-    const ReactEditorJS = createReactEditorJS();
+    return () => {
+      editor.isReady
+        .then(() => {
+          editor.destroy();
+        })
+        .catch((e) => console.error("ERROR editor cleanup", e));
+    };
+  }, []);
 
-    const handleInitialize = React.useCallback((instance) => {
-        editorCore.current = instance;
-    }, []);
+  //   const handleInitialize = React.useCallback((instance) => {
+  //     editorCore.current = instance;
+  //   }, []);
 
-    const handleSave = React.useCallback(async () => {
-        const savedData = await editorCore.current.dangerouslyLowLevelInstance?.save();
-        await handleSaveData(savedData);
+  //   const handleSave = React.useCallback(async () => {
+  //     const savedData = await editorRef.current.dangerouslyLowLevelInstance?.save();
+  //   }, []);
+//    const handleClear = React.useCallback(async () => {
+//       const savedData = await editorRef.current.dangerouslyLowLevelInstance?.clear();
+//     }, []);
 
-    }, []);
-    const handleClear = React.useCallback(async () => {
-        const savedData = await editorCore.current.dangerouslyLowLevelInstance?.clear();
-        await handleSaveData(savedData);
+  return (
+    <div className="editer">
+      <Button style={{ marginTop: "10px" }} >
+        Clear
+      </Button>
+      <div id="editer"></div>
+      {/*       <ReactEditorJS
+        onChange={handleSave}
+        onInitialize={handleInitialize}
+        tools={{
+          embed: Embed,
+          table: Table,
+          marker: Marker,
+          list: List,
 
-    }, []);
+          linkTool: LinkTool,
+          image: {
+            class: ImageTool,
+            config: {
+              endpoints: {
+                byFile: "https://intuza.karsoft.uz/api/v1/upload", // Your backend file uploader endpoint
+                byUrl: "https://intuza.karsoft.uz/api/v1/images", // Your endpoint that provides uploading by Url
+              },
+            },
+          },
 
-    return (
-        <div className="editer">
-            <Button style={{marginTop: "10px"}} onClick={handleClear}>Clear</Button>
-            <ReactEditorJS
-                onChange={handleSave}
-                onInitialize={handleInitialize}
-                tools={{
-                    embed: Embed,
-                    table: Table,
-                    marker: Marker,
-                    list: List,
-                 
-                    linkTool: LinkTool,
-                    image: {
-                        class: ImageTool,
-                        config: {
-                            endpoints: {
-                                byFile: "https://intuza.karsoft.uz/api/v1/upload", // Your backend file uploader endpoint
-                                byUrl: "https://intuza.karsoft.uz/api/v1/images", // Your endpoint that provides uploading by Url
-                            },
-                        },
-                    },
-        
-                    header: Header,
-                    quote: Quote,
-                    checklist: CheckList,
-                    delimiter: Delimiter,
-                    inlineCode: InlineCode,
-                    simpleImage: SimpleImage,
-                    youtubeEmbed: YoutubeEmbed,
-                }}
-            />
-        </div>
-    );
+          header: Header,
+          quote: Quote,
+          checklist: CheckList,
+          delimiter: Delimiter,
+          inlineCode: InlineCode,
+          simpleImage: SimpleImage,
+          youtubeEmbed: YoutubeEmbed,
+        }}
+      /> */}
+    </div>
+  );
 };
 
 export default Editer;
