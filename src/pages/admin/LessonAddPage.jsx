@@ -23,6 +23,8 @@ const LessonAddPage = () => {
   const [selectId, setSelectId] = React.useState(0);
   const [subSelectId, setSubSelectId] = React.useState(0);
   const [subInput, setSubInput] = React.useState("");
+  const [materialsType, setMaterialsType] = React.useState("Materials");
+
   const [data, setData] = React.useState({});
   React.useEffect(() => {
     const cancelToken = axios.CancelToken.source();
@@ -32,7 +34,7 @@ const LessonAddPage = () => {
     return () => {
       cancelToken.cancel();
     };
-  }, [id]);
+  }, [id, dispatch]);
 
   const showDrawer = (type) => {
     setType(type);
@@ -69,6 +71,16 @@ const LessonAddPage = () => {
   const handleChangeSubSelect = (value) => {
     setSubSelectId(Number(value));
   };
+
+  const onChangeMaterialsType = (value) => {
+    if (value === "Test") {
+      setMaterialsType("Test");
+      setSubInput("Test");
+    } else {
+      setSubInput("");
+      setMaterialsType("Materials");
+    }
+  };
   return (
     <div className="lesson">
       <Space>
@@ -82,7 +94,7 @@ const LessonAddPage = () => {
             course.lessons.map((item) => (
               <Accordion key={item.id} title={item.name}>
                 {item.sub_lessons.map((sub) => (
-                  <Accordion  title={sub.name} key={sub.id}>
+                  <Accordion title={sub.name} key={sub.id}>
                     {sub.sub_lesson_2s.length > 0 ? (
                       sub.sub_lesson_2s.map((subItem) => <AccordionItem title={subItem.name} key={subItem.id} />)
                     ) : (
@@ -95,11 +107,11 @@ const LessonAddPage = () => {
         </div>
       ) : (
         <div>
-          <Button style={{ marginTop: "10px" }} onClick={onFinishSubSubLessonAdd}>
+          <Button style={{ marginTop: "10px", marginRight: "10px" }} onClick={onFinishSubSubLessonAdd}>
             Send
           </Button>
           <h3>Select category</h3>
-          <Select style={{ minWidth: "140px" }} onChange={handleChangeSelect}>
+          <Select style={{ minWidth: "140px", marginRight: "10px" }} onChange={handleChangeSelect}>
             {course.lessons &&
               course.lessons.map((item, i) => (
                 <Select.Option key={item.id} value={i}>
@@ -107,7 +119,10 @@ const LessonAddPage = () => {
                 </Select.Option>
               ))}
           </Select>
-          <Select style={{ minWidth: "140px", marginTop: "10px" }} onChange={handleChangeSubSelect}>
+          <Select
+            style={{ minWidth: "140px", marginTop: "10px", marginRight: "10px" }}
+            onChange={handleChangeSubSelect}
+          >
             {course.lessons &&
               course.lessons[selectId].sub_lessons.map((sub) => (
                 <Select.Option key={sub.id} value={sub.id}>
@@ -115,8 +130,18 @@ const LessonAddPage = () => {
                 </Select.Option>
               ))}
           </Select>
-          <h3>Name of material</h3>
-          <Input value={subInput} onChange={(e) => setSubInput(e.target.value)} />
+          <Select
+            defaultValue="Materials"
+            value={materialsType}
+            onChange={onChangeMaterialsType}
+            style={{ minWidth: "140px", marginTop: "10px" }}
+          >
+            <Select.Option value="Materials">Materials</Select.Option>
+            <Select.Option value="Test">Test</Select.Option>
+          </Select>
+          {materialsType !== "Test" ? <h3>Name of material</h3> : <h3>Test</h3>}
+          {materialsType !== "Test" && <Input value={subInput} onChange={(e) => setSubInput(e.target.value)} />}
+
           <Editer handleSaveData={(value) => setData(value)} />
         </div>
       )}

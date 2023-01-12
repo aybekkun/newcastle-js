@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { $host } from "../../axios";
-import { CancelToken } from "axios";
 export const fetchCourses = createAsyncThunk("courses/fetchCourses", async (params, thunkAPI) => {
   try {
     const response = await $host.get("courses", {

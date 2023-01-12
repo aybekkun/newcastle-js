@@ -14,7 +14,6 @@ import Table from "@editorjs/table";
 import YoutubeEmbed from "editorjs-youtube-embed";
 //import Audio from "audio-editor-js";
 import React from "react";
-import axios from "axios";
 const Editer = ({ handleSaveData }) => {
   React.useEffect(() => {
     const editor = new EditorJS({
@@ -29,8 +28,8 @@ const Editer = ({ handleSaveData }) => {
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: "https://intuza.karsoft.uz/api/v1/upload", // Your backend file uploader endpoint
-              byUrl: "https://intuza.karsoft.uz/public/images", // Your endpoint that provides uploading by Url
+              byFile: `${import.meta.env.VITE_APP_BASE_URL}/api/v1/upload`, // Your backend file uploader endpoint
+              byUrl: `${import.meta.env.VITE_APP_BASE_URL}/public/images`, // Your endpoint that provides uploading by Url
             },
           },
         },

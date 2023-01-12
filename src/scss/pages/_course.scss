@@ -39,17 +39,26 @@
     height: 460px;
   }
   &__desc {
-    & > h3,
+    h3,
     h2,
     h4,
     h5,
     h6 {
+      margin: 0 !important;
       max-width: 700px;
       font-weight: 500;
       font-size: 20px;
       line-height: 24px;
       color: $titleColor;
-      margin-bottom: 20px;
+      margin-bottom: 20px !important;
+      &:first-child {
+        font-weight: 700;
+        font-size: 34px;
+        line-height: 41px;
+        color: #00214b;
+        margin-bottom: 20px !important;
+
+      }
     }
     img {
       margin-bottom: 40px;
@@ -70,7 +79,7 @@
       font-size: 16px;
       line-height: 19px;
       color: $grayColor;
-      margin-bottom: 40px;
+      margin-bottom: 40px !important;
     }
     & > img {
       border-radius: 10px;
@@ -87,6 +96,7 @@
       color: $grayColor;
       margin-bottom: 40px;
     }
+  
   }
 }
 

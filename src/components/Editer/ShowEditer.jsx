@@ -1,6 +1,6 @@
 import React from "react";
 
-import { HeaderOutput, ParagraphOutput, TableOutput } from "editorjs-react-renderer";
+import { HeaderOutput, ParagraphOutput } from "editorjs-react-renderer";
 
 const ShowEditer = ({ blocks }) => {
   if (blocks) {
@@ -36,7 +36,7 @@ const Output = ({ block }) => {
       return <hr />;
 
     case "image":
-      return <img src={`${block.data.file.url}`} />;
+      return <img src={`${block.data.file.url}`} alt=""/>;
 
     case "list":
       return (
@@ -51,7 +51,7 @@ const Output = ({ block }) => {
         <div className="test">
           {block.data.items.map((item, i) => (
             <label key={i}>
-              <input type="radio" name="q-1" />
+              <input type="radio" name={block.id} />
               <span className="checkmark"></span>
               <span className="checkmark__text">{item.text}</span>
             </label>

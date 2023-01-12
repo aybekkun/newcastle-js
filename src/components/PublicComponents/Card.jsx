@@ -16,7 +16,7 @@ const Card = ({ id, secondId, title, description, image, price, lessons, onDelet
       <div className="card__item-box">
         <Link to={`/course/${id}/${secondId ? secondId : 0}`} className="card__item">
           <div className="card__image-box">
-            <img src={image ? `https://intuza.karsoft.uz/public/images/${image}` : cardImg} alt="Card" />
+            <img src={image ? `${import.meta.env.VITE_APP_BASE_URL}/public/images/${image}` : cardImg} alt="Card" />
           </div>
           <div className="card__desc-box">
             <h3 className="card__title">{title}</h3>
@@ -48,7 +48,7 @@ const Card = ({ id, secondId, title, description, image, price, lessons, onDelet
         </Link>
         {pathname === "admin" && (
           <Space className="card__buttons" style={{ marginTop: "10px" }}>
-            <Button onClick={()=>onDelete(id)} danger type="primary" size="small">
+            <Button onClick={() => onDelete(id)} danger type="primary" size="small">
               Delete
             </Button>
             <Button type="primary" size="small">

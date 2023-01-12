@@ -3,9 +3,18 @@ import cls from "classnames";
 import logo from "../../assets/logo.png";
 import useActive from "../../hooks/useActive.hook";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/auth/slice";
 const Header = () => {
   const { active, handleChangeActive } = useActive();
+  const dispatch = useDispatch();
+  const { isAuth } = useSelector((state) => state.auth);
 
+  const onLogout = () => {
+    if (window.confirm("Logout")) {
+      dispatch(logout());
+    }
+  };
   React.useEffect(() => {
     if (active) {
       document.body.style.overflowY = "hidden";
@@ -52,12 +61,20 @@ const Header = () => {
               </li>
             </ul>
             <div className="header__buttons">
-              <Link to="/signin" className="header__login">
-                Logn in
-              </Link>
-              <Link to="/signup" className="header__signup">
-                Sign up
-              </Link>
+              {!isAuth ? (
+                <>
+                  <Link to="/signin" className="header__login">
+                    Logn in
+                  </Link>
+                  <Link to="/signup" className="header__signup">
+                    Sign up
+                  </Link>
+                </>
+              ) : (
+                <button onClick={onLogout} className="header__signup">
+                  Logout
+                </button>
+              )}
             </div>
           </nav>
           <div onClick={handleChangeActive} className="nav__overlay"></div>

@@ -11,6 +11,7 @@ const GeneralPage = () => {
   const dispatch = useDispatch();
 
   const { data } = useSelector((state) => state.courses);
+
   React.useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     (async function () {
@@ -25,8 +26,7 @@ const GeneralPage = () => {
     if (window.confirm("Delete Course ?")) {
       await dispatch(deleteCourse({ id }));
       await dispatch(fetchCourses({}));
-      console.log(id);
-    }
+      }
   };
   return (
     <>

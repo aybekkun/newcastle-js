@@ -84,6 +84,9 @@
   .header {
     &__signup {
       margin-left: 20px;
+      width: 100%;
+      border: none;
+      outline: none;
     }
   }
   .nav {
@@ -381,7 +384,7 @@
     &__info-box {
       display: block;
     }
-    &__info-item{
+    &__info-item {
       margin-bottom: 20px;
     }
   }

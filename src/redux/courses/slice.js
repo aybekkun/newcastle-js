@@ -3,6 +3,7 @@ import {fetchCourse, fetchCourses} from "./asyncActions";
 const initialState = {
   data: [],
   course:{}
+  
 };
 
 export const coursesSlice = createSlice({
