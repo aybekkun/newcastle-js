@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userAuth } from "./asyncActions";
+import { userAuth, userCheck } from "./asyncActions";
 const initialState = {
   user: {},
   token: "",
@@ -30,6 +30,9 @@ export const authSlice = createSlice({
       state.isAuth = false;
       window.localStorage.removeItem("token");
     });
+    builder.addCase(userCheck.fulfilled, (state, action) => {});
+    builder.addCase(userCheck.pending, (state, action) => {});
+    builder.addCase(userCheck.rejected, (state, action) => {});
   },
 });
 
