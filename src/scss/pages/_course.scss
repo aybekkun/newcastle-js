@@ -4,6 +4,9 @@
   grid-template-columns: 820px 340px;
   grid-template-rows: auto;
   grid-gap: 40px;
+  &__desc-box{
+    position: relative;
+  }
   &__title-inner {
     & > h1,
     h2,

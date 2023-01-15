@@ -1,9 +1,10 @@
 import React from "react";
 import topImg from "../../../assets/top.png";
 import googleIcon from "../../../assets/google.svg";
+import topBg from "../../../assets/top-bg.svg";
 const TopSection = () => {
   return (
-    <section className="top">
+    <section className="top" style={{ backgroundImage: `url(${topBg})` }}>
       <div className="container">
         <div className="top__inner">
           <div className="top__about">

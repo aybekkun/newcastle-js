@@ -3,7 +3,7 @@ import { fetchMaterials} from "./asyncActions";
 const initialState = {
   blocks:[],
   lesson: {},
-  isLoading:false,
+  isMaterialLoading:false,
 };
 
 export const coursesSlice = createSlice({
@@ -16,13 +16,13 @@ export const coursesSlice = createSlice({
     builder.addCase(fetchMaterials.fulfilled, (state, action) => {
       state.lesson = action.payload;
       state.blocks = action.payload.data;
-      state.isLoading = false;
+      state.isMaterialLoading = false;
     });
     builder.addCase(fetchMaterials.pending, (state, action) => {
-      state.isLoading = true;
+      state.isMaterialLoading = true;
     });
     builder.addCase(fetchMaterials.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isMaterialLoading = false;
       state.lesson = {};
       state.blocks = [];
     });

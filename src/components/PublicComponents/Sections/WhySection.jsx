@@ -2,9 +2,10 @@ import React from "react";
 import checkIcon from "../../../assets/icons/check.svg";
 import compasIcon from "../../../assets/icons/compas.svg";
 import computerIcon from "../../../assets/icons/computer.svg";
+import whyBg from "../../../assets/why-bg.svg";
 const WhySection = () => {
   return (
-    <section className="why">
+    <section className="why" style={{ backgroundImage: `url(${whyBg})` }}>
       <div className="container">
         <div className="why__inner">
           <div className="why__desc-box">

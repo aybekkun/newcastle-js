@@ -2,15 +2,17 @@ import { Button, Form, Input, InputNumber, Select, Upload } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createCourse } from "../../redux/courses/asyncActions";
 const configDate = {
   rules: [{ required: true, message: "Пожалуйста введите!" }],
 };
 
 const AddCoursePage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [image, setImage] = React.useState(null);
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     const fd = new FormData();
     fd.append("title", values.title);
     fd.append("description", values.description);
@@ -18,7 +20,8 @@ const AddCoursePage = () => {
     fd.append("image", image);
     fd.append("teacher_id", 1);
 
-    dispatch(createCourse(fd));
+    await dispatch(createCourse(fd));
+    navigate("/admin/");
     // console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
@@ -26,7 +29,6 @@ const AddCoursePage = () => {
   };
   const handleFile = (e) => {
     let file = e.target.files[0];
-
     setImage(file);
   };
   return (

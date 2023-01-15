@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {fetchCourse, fetchCourses} from "./asyncActions";
+import { fetchCourse, fetchCourses } from "./asyncActions";
 const initialState = {
   data: [],
-  course:{}
-  
+  course: {},
+  materials: [],
 };
 
 export const coursesSlice = createSlice({
@@ -20,6 +20,11 @@ export const coursesSlice = createSlice({
     });
     builder.addCase(fetchCourse.fulfilled, (state, action) => {
       state.course = action.payload.data;
+      state.materials = action.payload.data.lessons;
+    });
+    builder.addCase(fetchCourse.rejected, (state, action) => {
+      state.course = {};
+      state.materials = [];
     });
   },
 });

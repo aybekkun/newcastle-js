@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userAuth, userCheck } from "./asyncActions";
+import { userAuth, userCheck, userReg } from "./asyncActions";
 const initialState = {
   user: {},
   token: "",
@@ -30,9 +30,27 @@ export const authSlice = createSlice({
       state.isAuth = false;
       window.localStorage.removeItem("token");
     });
-    builder.addCase(userCheck.fulfilled, (state, action) => {});
+    builder.addCase(userReg.fulfilled, (state, action) => {
+      state.user = action.payload.data.user;
+      state.token = action.payload.data.token;
+      state.isAuth = true;
+      window.localStorage.setItem("token", action.payload.data.token);
+    });
+    builder.addCase(userReg.pending, (state, action) => {});
+    builder.addCase(userReg.rejected, (state, action) => {
+      state.user = {};
+      state.isAuth = false;
+      window.localStorage.removeItem("token");
+    });
+    builder.addCase(userCheck.fulfilled, (state, action) => {
+      state.isAuth = true;
+    });
     builder.addCase(userCheck.pending, (state, action) => {});
-    builder.addCase(userCheck.rejected, (state, action) => {});
+    builder.addCase(userCheck.rejected, (state, action) => {
+      state.user = {};
+      state.isAuth = false;
+      window.localStorage.removeItem("token");
+    });
   },
 });
 

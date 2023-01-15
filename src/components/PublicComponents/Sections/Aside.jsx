@@ -10,18 +10,18 @@ const Aside = ({ id }) => {
   const { course } = useSelector((state) => state.courses);
   const params = useParams();
 
-  React.useEffect(() => {
-    const cancelToken = axios.CancelToken.source();
-    (async function () {
-      await dispatch(fetchCourse({ id: id, cancelToken: cancelToken.token }));
-    })();
-    return () => {
-      cancelToken.cancel();
-    };
-  }, [id]);
+  // React.useEffect(() => {
+  //   const cancelToken = axios.CancelToken.source();
+  //   (async function () {
+  //     await dispatch(fetchCourse({ id: id, cancelToken: cancelToken.token }));
+  //   })();
+  //   return () => {
+  //     cancelToken.cancel();
+  //   };
+  // }, [id]);
   return (
     <aside className="aside">
-      <h3 className="aside__title">Video material</h3>
+      <h3 className="aside__title">Materials</h3>
       {course.lessons &&
         course.lessons.map((item) => (
           <Accordion key={item.id} title={item.name}>
@@ -29,7 +29,12 @@ const Aside = ({ id }) => {
               <Accordion title={sub.name} key={sub.id}>
                 {sub.sub_lesson_2s.length > 0 ? (
                   sub.sub_lesson_2s.map((subItem) => (
-                    <AccordionItem link={`${id}/${subItem.id}`} title={subItem.name} key={subItem.id} />
+                    <AccordionItem
+                      available={item.available}
+                      link={`${id}/${subItem.id}`}
+                      title={subItem.name}
+                      key={subItem.id}
+                    />
                   ))
                 ) : (
                   <AccordionItem title="No courses" />
