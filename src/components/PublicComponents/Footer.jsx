@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
             <p className="footer__desc">Tincidunt sem sed tellus ullamcorper nulla phasellus</p>
             <ul className="footer__social">
               <li className="footer__social-item">
-                <a href="#" className="footer__social-link">
+                <a href="#" target="_blank" className="footer__social-link">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_52_211)">
                       <path
@@ -27,7 +28,7 @@ const Footer = () => {
                 </a>
               </li>
               <li className="footer__social-item">
-                <a href="#" className="footer__social-link">
+                <a href="#" target="_blank" className="footer__social-link">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_52_215)">
                       <path

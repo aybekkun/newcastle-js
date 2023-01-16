@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCourse, fetchCourses } from "./asyncActions";
+import { createCourse, fetchCourse, fetchCourses } from "./asyncActions";
 const initialState = {
   data: [],
   course: {},
   materials: [],
+  isSending: false,
 };
 
 export const coursesSlice = createSlice({
@@ -25,6 +26,15 @@ export const coursesSlice = createSlice({
     builder.addCase(fetchCourse.rejected, (state, action) => {
       state.course = {};
       state.materials = [];
+    });
+    builder.addCase(createCourse.pending, (state, action) => {
+      state.isSending = true;
+    });
+    builder.addCase(createCourse.fulfilled, (state, action) => {
+      state.isSending = false;
+    });
+    builder.addCase(createCourse.rejected, (state, action) => {
+      state.isSending = false;
     });
   },
 });

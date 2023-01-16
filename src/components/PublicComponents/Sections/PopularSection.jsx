@@ -28,9 +28,9 @@ const PopularSection = () => {
                                   description={item.description} image={item.image} lessons={item.lessons}/>
                         ))}
                     </div>
-                    <a href="#" className="btn popular__btn">
+                    <button href="#" className="btn popular__btn">
                         View all topics
-                    </a>
+                    </button>
                 </div>
             </div>
         </section>
