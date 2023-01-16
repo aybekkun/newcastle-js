@@ -2,6 +2,7 @@ import React from "react";
 
 import { HeaderOutput, ParagraphOutput } from "editorjs-react-renderer";
 
+import parse from 'html-react-parser';
 const ShowEditer = ({ blocks }) => {
   if (blocks) {
     return blocks.map((output) => <Output key={output.id} block={output} />);
@@ -36,10 +37,6 @@ const Output = ({ block }) => {
 
     case "paragraph":
       return <ParagraphOutput data={block.data} />;
-
-    case "delimiter":
-      return <hr />;
-
     case "image":
       return <img src={`${block.data.file.url}`} alt="" />;
     case "simpleImage":
@@ -48,7 +45,7 @@ const Output = ({ block }) => {
       return (
         <ul>
           {block.data.items.map((item) => (
-            <li>{item}</li>
+            <li>{parse(item)}</li>
           ))}
         </ul>
       );
@@ -71,7 +68,7 @@ const Output = ({ block }) => {
             <tr key={i}>
               {tr.map((td, i) => (
                 <td style={{ minWidth: "100px", padding: "8px 15px", borderRadius: "2px", textAlign: "left" }} key={i}>
-                  {td}
+                  {parse(td)}
                 </td>
               ))}
             </tr>
