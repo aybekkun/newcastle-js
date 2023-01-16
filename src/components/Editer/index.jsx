@@ -27,6 +27,9 @@ const Editer = ({ handleSaveData }) => {
         image: {
           class: ImageTool,
           config: {
+            additionalRequestHeaders: {
+              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+            },
             endpoints: {
               byFile: `${import.meta.env.VITE_APP_BASE_URL}/api/v1/upload`, // Your backend file uploader endpoint
               byUrl: `${import.meta.env.VITE_APP_BASE_URL}/public/images`, // Your endpoint that provides uploading by Url
@@ -52,7 +55,7 @@ const Editer = ({ handleSaveData }) => {
         //         let formData = new FormData();
         //         formData.append("audio", file);
         //         let req = await axios.post("https://intuza.karsoft.uz/api/v1/upload", formData);
-               
+
         //         return req.data;
         //       } catch (e) {
         //         console.error(e);

@@ -13,19 +13,24 @@ const Output = ({ block }) => {
   switch (block.type) {
     case "header":
       return <HeaderOutput data={block.data} />;
-
+    case "delimiter":
+      return <hr />;
     case "youtubeEmbed":
       return (
         <div className="wrapper__video-box">
-          <iframe
-            width="100%"
-            height="100%"
-            src={block.data.url.replace("watch?v=", "embed/")}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          {block.data?.url ? (
+            <iframe
+              width="100%"
+              height="100%"
+              src={block.data.url.replace("watch?v=", "embed/") || " "}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <h2>Video</h2>
+          )}
         </div>
       );
 
@@ -36,8 +41,9 @@ const Output = ({ block }) => {
       return <hr />;
 
     case "image":
-      return <img src={`${block.data.file.url}`} alt=""/>;
-
+      return <img src={`${block.data.file.url}`} alt="" />;
+    case "simpleImage":
+      return <img src={`${block.data.url}`} alt="" />;
     case "list":
       return (
         <ul>

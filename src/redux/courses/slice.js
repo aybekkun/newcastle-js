@@ -5,6 +5,7 @@ const initialState = {
   course: {},
   materials: [],
   isSending: false,
+  total: 0,
 };
 
 export const coursesSlice = createSlice({
@@ -18,6 +19,7 @@ export const coursesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchCourses.fulfilled, (state, action) => {
       state.data = action.payload.data;
+      state.total = action.payload.total;
     });
     builder.addCase(fetchCourse.fulfilled, (state, action) => {
       state.course = action.payload.data;

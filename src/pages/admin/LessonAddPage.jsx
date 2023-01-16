@@ -62,6 +62,8 @@ const LessonAddPage = () => {
     } else {
       console.log({ name: subInput, sub_lesson_id: subSelectId, data: data });
       await dispatch(createSubSubLesson({ name: subInput, sub_lesson_id: subSelectId, data: data }));
+      setType("lessonAdd");
+      await dispatch(fetchCourse({ id: id}));
     }
   };
 
