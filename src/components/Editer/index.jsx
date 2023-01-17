@@ -36,12 +36,9 @@ const Editer = ({ handleSaveData }) => {
             },
           },
         },
-
         header: Header,
-        quote: Quote,
         checklist: CheckList,
         delimiter: Delimiter,
-        inlineCode: InlineCode,
         simpleImage: SimpleImage,
         youtubeEmbed: YoutubeEmbed,
         // audio: {

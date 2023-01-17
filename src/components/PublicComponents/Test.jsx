@@ -14,7 +14,7 @@ const Test = ({ blocks }) => {
   const [checkedArr, setCheckedArr] = React.useState([]);
   const [checked, setChecked] = React.useState(false);
   const [count, setCount] = React.useState(0);
-  const [arrCount, setArrCount] = React.useState(0);
+
   React.useEffect(() => {
     if (blocks) {
       const tests = blocks.filter((item) => item.type === "checklist").map((item) => item.data?.items);

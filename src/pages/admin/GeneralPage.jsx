@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Pagination } from "antd";
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,23 +10,28 @@ const GeneralPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { data } = useSelector((state) => state.courses);
+  const { data, total } = useSelector((state) => state.courses);
+
+  const [current, setCurrent] = React.useState(1);
 
   React.useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     (async function () {
-      await dispatch(fetchCourses({ cancelToken: cancelToken.token }));
+      await dispatch(fetchCourses({ page: current, limit: 4, cancelToken: cancelToken.token }));
     })();
     return () => {
       cancelToken.cancel();
     };
-  }, []);
+  }, [current]);
 
   const onDeleteCourse = async (id) => {
     if (window.confirm("Delete Course ?")) {
       await dispatch(deleteCourse({ id }));
       await dispatch(fetchCourses({}));
-      }
+    }
+  };
+  const onChange = (page) => {
+    setCurrent(page);
   };
   return (
     <>
@@ -48,6 +53,7 @@ const GeneralPage = () => {
           />
         ))}
       </div>
+      <Pagination current={current} defaultPageSize={4} total={total} onChange={onChange} pageSize={4} />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { $host } from "../../axios";
 export const fetchCourses = createAsyncThunk("courses/fetchCourses", async (params, thunkAPI) => {
   try {
     const response = await $host.get("courses", {
+      params: params,
       cancelToken: params.cancelToken,
     });
     return response.data;

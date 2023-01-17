@@ -2,10 +2,20 @@ import React from "react";
 import playIcon from "../../assets/icons/play.svg";
 import materialsIcon from "../../assets/icons/materials.svg";
 import { NavLink } from "react-router-dom";
-const AccordionItem = ({ title = "Lesson", link, available = false }) => {
+const AccordionItem = ({
+  title = "Lesson",
+  link,
+  available = false,
+ 
+}) => {
   const onToScroll = () => {
     window.scrollTo(0, 0);
   };
+
+  React.useEffect(()=>{
+
+  },[])
+
   if (!link || !available) {
     return (
       <div className="accordion__item">

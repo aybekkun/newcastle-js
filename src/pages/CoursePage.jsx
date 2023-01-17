@@ -10,7 +10,6 @@ import CourseInfo from "../components/PublicComponents/Sections/CourseInfo";
 import Test from "../components/PublicComponents/Test";
 import { fetchCourse } from "../redux/courses/asyncActions";
 import { fetchMaterials } from "../redux/lessons/asyncActions";
-import { Spin } from "antd";
 import Spinner from "../components/PublicComponents/Spinner";
 const CoursePage = () => {
   const { blocks, lesson, isMaterialLoading } = useSelector((state) => state.lessons);
@@ -30,13 +29,15 @@ const CoursePage = () => {
       cancelToken.cancel();
     };
   }, [courseId, dispatch, id]);
+
+  
   return (
     <>
       <div className="container">
         <div className="wrapper">
           <div className="wrapper__inner">
             <div className="wrapper__title-box">
-              <h3 className="subtitle wrapper__subtitle">Kurslar</h3>
+              <h3 className="subtitle wrapper__subtitle">Kurslar </h3>
             </div>
             <div className="tab-content wrapper__desc-box">
               {isMaterialLoading && <Spinner />}

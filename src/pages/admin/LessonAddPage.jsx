@@ -109,8 +109,8 @@ const LessonAddPage = () => {
         </div>
       ) : (
         <div>
-          <Button style={{ marginTop: "10px", marginRight: "10px" }} onClick={onFinishSubSubLessonAdd}>
-            Send
+          <Button type="primary" style={{ marginTop: "10px", marginRight: "10px" }} onClick={onFinishSubSubLessonAdd}>
+            Save
           </Button>
           <h3>Select category</h3>
           <Select style={{ minWidth: "140px", marginRight: "10px" }} onChange={handleChangeSelect}>
