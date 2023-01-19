@@ -79,7 +79,8 @@ const Output = ({ block }) => {
       );
     case "quote":
       return <Quote block={block} />;
-
+    case "audio":
+      return <audio style={{ marginBottom: "20px" }} controlsList="nodownload" controls src={block.data.url}></audio>;
     default:
       console.log("Unknown block type", block.type);
       break;

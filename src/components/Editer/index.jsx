@@ -34,7 +34,7 @@ const Editer = ({ handleSaveData }) => {
             },
             endpoints: {
               byFile: `${import.meta.env.VITE_APP_BASE_URL}/api/v1/upload`, // Your backend file uploader endpoint
-              byUrl: `${import.meta.env.VITE_APP_BASE_URL}/public/images`, // Your endpoint that provides uploading by Url
+              byUrl: `${import.meta.env.VITE_APP_BASE_URL}/public/storage`, // Your endpoint that provides uploading by Url
             },
           },
         },
@@ -46,15 +46,15 @@ const Editer = ({ handleSaveData }) => {
         audio: {
           class: Audio,
           config: {
-            token: `Bearer ${window.localStorage.getItem("token")}`,
-            route:`${import.meta.env.VITE_APP_BASE_URL}/v1/upload`,
+            // token: `Bearer ${window.localStorage.getItem("token")}`,
+            route: `${import.meta.env.VITE_APP_BASE_URL}/public/storage`,
             routeDelete: `${import.meta.env.VITE_APP_BASE_URL}/public/storage/files`,
             saveServer: async (file) => {
               try {
                 let formData = new FormData();
                 formData.append("audio", file);
-                let req = await $host.post("https://intuza.karsoft.uz/api/v1/upload", formData);
-
+                let req = await $host.post(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/upload`, formData);
+                console.log(req.data);
                 return req.data;
               } catch (e) {
                 console.error(e);
