@@ -3,22 +3,29 @@ import Card from "../Card";
 import axios from "axios";
 import { fetchCourses } from "../../../redux/courses/asyncActions.js";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const PopularSection = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.courses);
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     (async function () {
-      await dispatch(fetchCourses({ cancelToken: cancelToken.token }));
+      if (pathname === "/courses") {
+        await dispatch(fetchCourses({ cancelToken: cancelToken.token }));
+      } else {
+        await dispatch(fetchCourses({ limit: 4, cancelToken: cancelToken.token }));
+      }
     })();
     return () => {
       cancelToken.cancel();
     };
   }, []);
+  const onScroll = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <section className="popular">
       <h3 className="popular__subtitle subtitle">ADVANCE YOUR CAREER</h3>
@@ -39,10 +46,11 @@ const PopularSection = () => {
               />
             ))}
           </div>
-
-          <button href="#" className="btn popular__btn">
-            View all topics
-          </button>
+          {pathname !== "/courses" && (
+            <Link to="/courses" className="btn popular__btn">
+              View all topics
+            </Link>
+          )}
         </div>
       </div>
     </section>

@@ -4,7 +4,7 @@ import ShowEditer from "../Editer/ShowEditer";
 import cls from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { createCheckTest } from "../../redux/checkTest/asyncActions";
-const Test = ({ blocks }) => {
+const Test = ({ blocks, isInner = false }) => {
   const dispatch = useDispatch();
   const { lesson } = useSelector((state) => state.lessons);
   const { user } = useSelector((state) => state.auth);
@@ -40,7 +40,11 @@ const Test = ({ blocks }) => {
         }
         return 0;
       });
-      await dispatch(createCheckTest({ lesson_id: lesson.id, user_id: user.id, number: test.length, overall: result }));
+      if (!isInner) {
+        await dispatch(
+          createCheckTest({ lesson_id: lesson.id, user_id: user.id, number: test.length, overall: result })
+        );
+      }
       window.scrollTo(0, 0);
       setCount(result);
       setChecked(true);
@@ -55,7 +59,7 @@ const Test = ({ blocks }) => {
   return (
     <div className="wrapper__desc">
       <div className="test">
-        {checked && (
+        {!isInner && checked && (
           <div className="test__result">
             <h3>Result of test</h3>
             <div className="test__result-box">
@@ -126,11 +130,11 @@ const Test = ({ blocks }) => {
           })}
 
         {!checked ? (
-          <button onClick={onCheckTest} className="btn">
+          <button onClick={onCheckTest} style={{ margin: "0px", marginBottom: "10px" }} className="btn">
             Check Test
           </button>
         ) : (
-          <button onClick={onSumbitAgain} className="btn">
+          <button onClick={onSumbitAgain} style={{ margin: "0px", marginBottom: "10px" }} className="btn">
             Submit again
           </button>
         )}

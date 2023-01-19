@@ -20,8 +20,6 @@ const AddCoursePage = () => {
     fd.append("description", values.description);
     fd.append("price", values.price);
     fd.append("image", image);
-    fd.append("teacher_id", 1);
-
     await dispatch(createCourse(fd));
     navigate("/admin/");
     // console.log("Success:", values);
@@ -59,14 +57,6 @@ const AddCoursePage = () => {
             placeholder="text"
           />
         </Form.Item>
-{/*         <h3>Преподователь</h3>
-        <Form.Item name="teacher_id" {...configDate}>
-          <Select placeholder="Пожалуйста выберите группу">
-            <Select.Option value={"lucy"}>Lucy</Select.Option>
-            <Select.Option value={"jack"}>Jack</Select.Option>
-            <Select.Option value={"Def"}>Def</Select.Option>
-          </Select>
-        </Form.Item> */}
         <h3>Цена</h3>
         <Form.Item name="price" {...configDate}>
           <InputNumber

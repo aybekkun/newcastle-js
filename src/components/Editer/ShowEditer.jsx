@@ -2,7 +2,8 @@ import React from "react";
 
 import { HeaderOutput, ParagraphOutput } from "editorjs-react-renderer";
 
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
+import Test from "../PublicComponents/Test";
 const ShowEditer = ({ blocks }) => {
   if (blocks) {
     return blocks.map((output) => <Output key={output.id} block={output} />);
@@ -51,15 +52,16 @@ const Output = ({ block }) => {
       );
     case "checklist":
       return (
-        <div className="test">
-          {block.data.items.map((item, i) => (
-            <label key={i}>
-              <input type="radio" name={block.id} />
-              <span className="checkmark"></span>
-              <span className="checkmark__text">{item.text}</span>
-            </label>
-          ))}
-        </div>
+        // <div className="test">
+        //   {block.data.items.map((item, i) => (
+        //     <label key={i}>
+        //       <input type="radio" name={block.id} />
+        //       <span className="checkmark"></span>
+        //       <span className="checkmark__text">{item.text}</span>
+        //     </label>
+        //   ))}
+        // </div>
+        <Test blocks={[block]} isInner={true} />
       );
     case "table":
       return (
@@ -75,11 +77,29 @@ const Output = ({ block }) => {
           ))}
         </table>
       );
+    case "quote":
+      return <Quote block={block} />;
 
     default:
       console.log("Unknown block type", block.type);
       break;
   }
+};
+
+const Quote = ({ block }) => {
+  const [active, setActive] = React.useState(false);
+  return (
+    <>
+      <button
+        onClick={() => setActive((prev) => !prev)}
+        style={{ marginBottom: "10px", marginTop: "10px" }}
+        className="btn"
+      >
+        {parse(block.data.caption)}
+      </button>
+      {active && <p>{parse(block.data.text)}</p>}
+    </>
+  );
 };
 
 export default ShowEditer;

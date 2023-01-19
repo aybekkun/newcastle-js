@@ -19,6 +19,7 @@ const Editer = ({ handleSaveData }) => {
     const editor = new EditorJS({
       holder: "editer",
       tools: {
+        quote: Quote,
         embed: Embed,
         table: Table,
         marker: Marker,

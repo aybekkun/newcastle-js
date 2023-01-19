@@ -1,7 +1,7 @@
 import React from "react";
 
-import manOne from "../../assets/man-1.jpg";
-import manTwo from "../../assets/man-2.jpg";
+import manOne from "../../../assets/man-1.jpg";
+import manTwo from "../../../assets/man-2.jpg";
 const CertificateSection = () => {
   return (
     <section className="certificate">

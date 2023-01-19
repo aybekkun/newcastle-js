@@ -6,10 +6,17 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/slice";
 const Header = () => {
-  const { active, handleChangeActive } = useActive();
+  const [active, setActive] = React.useState(false);
+
   const dispatch = useDispatch();
   const { isAuth } = useSelector((state) => state.auth);
 
+  const handleChangeActive = () => {
+    setActive((prev) => !prev);
+  };
+  const handleClose = () => {
+    setActive(false);
+  };
   const onLogout = () => {
     if (window.confirm("Logout")) {
       dispatch(logout());
@@ -25,6 +32,7 @@ const Header = () => {
       document.body.style.overflowY = "scroll";
     };
   }, [active]);
+
   return (
     <header className="header">
       <div className="container">
@@ -35,27 +43,27 @@ const Header = () => {
           <nav className={cls("nav", { active: active })}>
             <ul className="nav__list">
               <li className="nav__list-item">
-                <Link to="/" className="nav__list-link nav__list-link--active">
+                <Link to="/" onClick={handleClose} className="nav__list-link nav__list-link--active">
                   Homepage
                 </Link>
               </li>
               <li className="nav__list-item">
-                <Link to="/" className="nav__list-link">
+                <Link to="/" onClick={handleClose} className="nav__list-link">
                   About
                 </Link>
               </li>
               <li className="nav__list-item">
-                <Link to="/courses" className="nav__list-link">
+                <Link to="/courses" onClick={handleClose} className="nav__list-link">
                   Courses
                 </Link>
               </li>
               <li className="nav__list-item">
-                <Link to="/admin" className="nav__list-link">
+                <Link to="/admin" onClick={handleClose} className="nav__list-link">
                   Contact
                 </Link>
               </li>
               <li className="nav__list-item">
-                <Link to="/" className="nav__list-link">
+                <Link to="/" onClick={handleClose} className="nav__list-link">
                   Pages
                 </Link>
               </li>
@@ -63,10 +71,10 @@ const Header = () => {
             <div className="header__buttons">
               {!isAuth ? (
                 <>
-                  <Link to="/signin" className="header__login">
+                  <Link to="/signin" onClick={handleClose} className="header__login">
                     Logn in
                   </Link>
-                  <Link to="/signup" className="header__signup">
+                  <Link to="/signup" onClick={handleClose} className="header__signup">
                     Sign up
                   </Link>
                 </>

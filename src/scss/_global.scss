@@ -18,7 +18,6 @@ img {
   display: block;
   height: auto;
   max-width: 100%;
-
 }
 .container {
   max-width: 1240px;
@@ -31,6 +30,7 @@ a {
 }
 
 .btn {
+  position: relative;
   display: inline-flex;
   background: $blueColor;
   white-space: nowrap;
@@ -42,9 +42,16 @@ a {
   outline: none;
   border: none;
   cursor: pointer;
+  transition: all 0.3s;
   &:hover {
     color: $white;
     opacity: 0.9;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+  &:target {
+    transform: scale(0.9);
   }
 }
 
