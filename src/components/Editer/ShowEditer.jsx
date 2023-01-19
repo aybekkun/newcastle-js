@@ -95,7 +95,7 @@ const Quote = ({ block }) => {
         style={{ marginBottom: "10px", marginTop: "10px" }}
         className="btn"
       >
-        {parse(block.data.caption)}
+        Show
       </button>
       {active && <p>{parse(block.data.text)}</p>}
     </>

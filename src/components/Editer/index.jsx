@@ -14,6 +14,7 @@ import Table from "@editorjs/table";
 import YoutubeEmbed from "editorjs-youtube-embed";
 //import Audio from "audio-editor-js";
 import React from "react";
+import { $host } from "../../axios";
 const Editer = ({ handleSaveData }) => {
   React.useEffect(() => {
     const editor = new EditorJS({
@@ -42,25 +43,25 @@ const Editer = ({ handleSaveData }) => {
         delimiter: Delimiter,
         simpleImage: SimpleImage,
         youtubeEmbed: YoutubeEmbed,
-        // audio: {
-        //   class: Audio,
-        //   config: {
-        //     token: `Bearer ${localStorage.getItem("token")}`,
-        //     route: "https://intuza.karsoft.uz/api/v1/upload",
-        //     routeDelete: `https://intuza.karsoft.uz/public/storage/files`,
-        //     saveServer: async (file) => {
-        //       try {
-        //         let formData = new FormData();
-        //         formData.append("audio", file);
-        //         let req = await axios.post("https://intuza.karsoft.uz/api/v1/upload", formData);
+        audio: {
+          class: Audio,
+          config: {
+            token: `Bearer ${window.localStorage.getItem("token")}`,
+            route:`${import.meta.env.VITE_APP_BASE_URL}/v1/upload`,
+            routeDelete: `${import.meta.env.VITE_APP_BASE_URL}/public/storage/files`,
+            saveServer: async (file) => {
+              try {
+                let formData = new FormData();
+                formData.append("audio", file);
+                let req = await $host.post("https://intuza.karsoft.uz/api/v1/upload", formData);
 
-        //         return req.data;
-        //       } catch (e) {
-        //         console.error(e);
-        //       }
-        //     },
-        //   },
-        // },
+                return req.data;
+              } catch (e) {
+                console.error(e);
+              }
+            },
+          },
+        },
       },
       async onChange() {
         const { blocks } = await editor.save();
