@@ -17,10 +17,8 @@ const CoursePage = lazy(() => import("../pages/CoursePage"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const PopularPage = lazy(() => import("../pages/PopularPage"));
-const SignIn = lazy(() => import("../pages/SignUp"));
-const SignUp = lazy(() => import("../pages/SignIn"));
-
-
+const SignIn = lazy(() => import("../pages/SignIn"));
+const SignUp = lazy(() => import("../pages/SignUp"));
 
 const Routing = () => {
   return (
@@ -61,22 +59,22 @@ const Routing = () => {
             />
           </Route>
         </Route>
-        <Route path="/signin" element={<RegisterLayout />}>
-          <Route
-            index
-            element={
-              <Suspense fallback={<Spinner />}>
-                <SignIn />
-              </Suspense>
-            }
-          />
-        </Route>
         <Route path="/signup" element={<RegisterLayout />}>
           <Route
             index
             element={
               <Suspense fallback={<Spinner />}>
                 <SignUp />
+              </Suspense>
+            }
+          />
+        </Route>
+        <Route path="/signin" element={<RegisterLayout />}>
+          <Route
+            index
+            element={
+              <Suspense fallback={<Spinner />}>
+                <SignIn />
               </Suspense>
             }
           />

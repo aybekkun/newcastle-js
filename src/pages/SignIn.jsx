@@ -1,10 +1,11 @@
-import React from "react";
+import passwwordIcon from "../assets/icons/password.svg";
+import phoneIcon from "../assets/icons/phone.svg";
+import userRegIcon from "../assets/icons/userreg.svg";
 import { IMaskInput } from "react-imask";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
-import passwwordIcon from "../assets/icons/password.svg";
-import phoneIcon from "../assets/icons/phone.svg";
-import { userAuth } from "../redux/auth/asyncActions";
+import React from "react";
+import { userReg } from "../redux/auth/asyncActions";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -14,18 +15,34 @@ const SignIn = () => {
   let location = useLocation();
 
   const inputRef = React.useRef(null);
+  const nameRef = React.useRef(null);
   const passwordRef = React.useRef(null);
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(userAuth({ phone: inputRef.current.value, password: passwordRef.current.value }));
+    await dispatch(
+      userReg({ name: nameRef.current.value, phone: inputRef.current.value, password: passwordRef.current.value })
+    );
   };
-
   if (isAuth) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
   return (
-    <form onSubmit={onSubmit} className="signin">
-      <h3>Kirish</h3>
+    <form onSubmit={onSubmit} className="signin" autoComplete="off">
+      <h3>Registratsiya</h3>
+      <div className="input">
+        <img src={userRegIcon} alt="user" />
+        <input
+          ref={nameRef}
+          name="name"
+          maxLength={50}
+          minLength={2}
+          placeholder="Ism, familiya"
+          type="text"
+          className="sign__tel"
+          required
+        />
+      </div>
       <div className="input">
         <img src={phoneIcon} alt="phone" />
         <IMaskInput

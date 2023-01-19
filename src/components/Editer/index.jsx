@@ -4,7 +4,7 @@ import EditorJS from "@editorjs/editorjs";
 import Embed from "@editorjs/embed";
 import Header from "@editorjs/header";
 import ImageTool from "@editorjs/image";
-import InlineCode from "@editorjs/inline-code";
+
 import LinkTool from "@editorjs/link";
 import List from "@editorjs/list";
 import Marker from "@editorjs/marker";
@@ -12,7 +12,7 @@ import Quote from "@editorjs/quote";
 import SimpleImage from "@editorjs/simple-image";
 import Table from "@editorjs/table";
 import YoutubeEmbed from "editorjs-youtube-embed";
-//import Audio from "audio-editor-js";
+import Audio from "audio-editor-js";
 import React from "react";
 import { $host } from "../../axios";
 const Editer = ({ handleSaveData }) => {

@@ -28,7 +28,7 @@ const RegisterLayout = () => {
             <li className="register__nav-item">
               <NavLink
                 className={({ isActive }) => (isActive ? "active register__nav-link" : "register__nav-link")}
-                to="/signin"
+                to="/signup"
               >
                 Kirish
               </NavLink>
@@ -36,7 +36,7 @@ const RegisterLayout = () => {
             <li className="register__nav-item">
               <NavLink
                 className={({ isActive }) => (isActive ? "active register__nav-link" : "register__nav-link")}
-                to="/signup"
+                to="/signin"
               >
                 Registratsiya
               </NavLink>
