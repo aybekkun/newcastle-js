@@ -1,7 +1,7 @@
 import { Button, Drawer, Space } from "antd";
 import axios from "axios";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import LessonAddForm from "../../components/AdminComponents/Lessons/LessonAddForm.jsx";
 import LessonAddMaterials from "../../components/AdminComponents/Lessons/LessonAddMaterials.jsx";
@@ -15,18 +15,14 @@ export const configDate = {
 
 const LessonAddPage = () => {
   const dispatch = useDispatch();
-  
+  const { course } = useSelector((state) => state.courses);
   const { id } = useParams();
   const [tabContent, setTabContent] = React.useState(0);
   const [openDrawer, setOpenDrawer] = React.useState(false);
   React.useEffect(() => {
-    const cancelToken = axios.CancelToken.source();
     (async function () {
-      await dispatch(fetchCourse({ id: id, cancelToken: cancelToken.token }));
+      await dispatch(fetchCourse({ id: id }));
     })();
-    return () => {
-      cancelToken.cancel();
-    };
   }, [id, dispatch]);
   const handleClose = () => {
     setOpenDrawer(false);
@@ -46,8 +42,8 @@ const LessonAddPage = () => {
         <Button onClick={() => onClickBtns(2)}>Add subLesson</Button>
         <Button onClick={() => onClickBtns(3)}>Add materials</Button>
       </Space>
-      {tabContent !== 3 && <LessonsInfo />}
-      {tabContent === 3 && <LessonAddMaterials handleChangeTab={() => setTabContent(1)} id={id} />}
+      {tabContent !== 3 && course && <LessonsInfo />}
+      {tabContent === 3 && course && <LessonAddMaterials handleChangeTab={() => setTabContent(1)} id={id} />}
       <Drawer
         title={`Add`}
         placement={"right"}
@@ -55,8 +51,8 @@ const LessonAddPage = () => {
         onClose={handleClose}
         open={openDrawer && tabContent !== 3}
       >
-        {tabContent === 1 && <LessonAddForm id={id} handleClose={handleClose} />}
-        {tabContent === 2 && <SubLessonAddForm id={id} handleClose={handleClose} />}
+        {tabContent === 1 && course && <LessonAddForm id={id} handleClose={handleClose} />}
+        {tabContent === 2 && course && <SubLessonAddForm id={id} handleClose={handleClose} />}
       </Drawer>
     </div>
   );
