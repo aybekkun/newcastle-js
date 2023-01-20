@@ -2,7 +2,7 @@ import { Button, Input, Select } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCourse } from "../../../redux/courses/asyncActions";
-import { createSubSubLesson } from "../../../redux/lessons/asyncActions";
+import { createSubSubLesson, createTest } from "../../../redux/lessons/asyncActions";
 import Editer from "../../Editer";
 
 const LessonAddMaterials = ({ id, handleChangeTab }) => {
@@ -22,6 +22,9 @@ const LessonAddMaterials = ({ id, handleChangeTab }) => {
     } else {
       console.log({ name: subInput, sub_lesson_id: subSelectId, data: data });
       await dispatch(createSubSubLesson({ name: subInput, sub_lesson_id: subSelectId, data: data }));
+      if(subInput==="Test"){
+        await dispatch(createTest({ name: subInput, id: subSelectId, data: data }));
+      }
       await dispatch(fetchCourse({ id: id }));
       handleChangeTab();
     }
