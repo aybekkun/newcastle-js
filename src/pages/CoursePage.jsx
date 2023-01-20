@@ -22,6 +22,7 @@ const CoursePage = () => {
   React.useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     (async function () {
+      window.scrollTo(0, 80);
       await dispatch(fetchCourse({ id: id, cancelToken: cancelToken.token }));
       await dispatch(fetchMaterials({ id: courseId, cancelToken: cancelToken.token }));
     })();

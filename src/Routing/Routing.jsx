@@ -8,6 +8,7 @@ import AdminLayout from "../layouts/AdminLayout";
 
 const Course = lazy(() => import("../components/PublicComponents/Course"));
 const AddCoursePage = lazy(() => import("../pages/admin/AddCoursePage"));
+const AboutPage = lazy(() => import("../pages/AboutPage"));
 const BillingPage = lazy(() => import("../pages/admin/BillingPage"));
 const GeneralPage = lazy(() => import("../pages/admin/GeneralPage"));
 const LessonAddPage = lazy(() => import("../pages/admin/LessonAddPage"));
@@ -38,6 +39,14 @@ const Routing = () => {
             element={
               <Suspense fallback={<Spinner />}>
                 <PopularPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <Suspense fallback={<Spinner />}>
+                <AboutPage />
               </Suspense>
             }
           />

@@ -1,7 +1,7 @@
 import React from "react";
 import registerBgImg from "../assets/reg-bg.jpg";
 import logoImg from "../assets/logo.png";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 const RegisterLayout = () => {
   return (
     <div className="register">
@@ -12,9 +12,9 @@ const RegisterLayout = () => {
         </div>
       </div>
       <div className="register__enter">
-        <a href="#" className="logo">
+        <Link to="/" className="logo">
           <img src={logoImg} alt="" />
-        </a>
+        </Link>
         <div className="register__sign">
           <ul className="register__nav">
             <li className="register__nav-item">
@@ -28,7 +28,7 @@ const RegisterLayout = () => {
             <li className="register__nav-item">
               <NavLink
                 className={({ isActive }) => (isActive ? "active register__nav-link" : "register__nav-link")}
-                to="/signup"
+                to="/signin"
               >
                 Kirish
               </NavLink>
@@ -36,7 +36,7 @@ const RegisterLayout = () => {
             <li className="register__nav-item">
               <NavLink
                 className={({ isActive }) => (isActive ? "active register__nav-link" : "register__nav-link")}
-                to="/signin"
+                to="/signup"
               >
                 Registratsiya
               </NavLink>
