@@ -47,7 +47,6 @@ export const authSlice = createSlice({
     });
     builder.addCase(userCheck.pending, (state, action) => {});
     builder.addCase(userCheck.rejected, (state, action) => {
-      state.user =  { id: 0, name: "", phone: "", role: "", students: [] };
       state.isAuth = false;
       window.localStorage.removeItem("token");
     });

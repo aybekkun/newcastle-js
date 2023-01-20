@@ -16,6 +16,7 @@ export const configDate = {
 const LessonAddPage = () => {
   const dispatch = useDispatch();
   const { course } = useSelector((state) => state.courses);
+  console.log(course);
   const { id } = useParams();
   const [tabContent, setTabContent] = React.useState(0);
   const [openDrawer, setOpenDrawer] = React.useState(false);
@@ -42,8 +43,12 @@ const LessonAddPage = () => {
         <Button onClick={() => onClickBtns(2)}>Add subLesson</Button>
         <Button onClick={() => onClickBtns(3)}>Add materials</Button>
       </Space>
-      {tabContent !== 3 && course && <LessonsInfo />}
-      {tabContent === 3 && course && <LessonAddMaterials handleChangeTab={() => setTabContent(1)} id={id} />}
+      {tabContent !== 3 && course ? <LessonsInfo /> : <h2>Loading..</h2>}
+      {tabContent === 3 && course ? (
+        <LessonAddMaterials handleChangeTab={() => setTabContent(1)} id={id} />
+      ) : (
+        <h2>Loading..</h2>
+      )}
       <Drawer
         title={`Add`}
         placement={"right"}
@@ -51,8 +56,8 @@ const LessonAddPage = () => {
         onClose={handleClose}
         open={openDrawer && tabContent !== 3}
       >
-        {tabContent === 1 && course && <LessonAddForm id={id} handleClose={handleClose} />}
-        {tabContent === 2 && course && <SubLessonAddForm id={id} handleClose={handleClose} />}
+        {tabContent === 1 && course ? <LessonAddForm id={id} handleClose={handleClose} /> : <h2>Loading..</h2>}
+        {tabContent === 2 && course ? <SubLessonAddForm id={id} handleClose={handleClose} /> : <h2>Loading..</h2>}
       </Drawer>
     </div>
   );
