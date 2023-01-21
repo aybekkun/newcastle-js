@@ -41,6 +41,9 @@ const LessonAddMaterials = ({ id, handleChangeTab }) => {
   const handleChangeSubSelect = (value) => {
     setSubSelectId(Number(value));
   };
+  if (course.sub_lesson_2s < 1) {
+    return <h3>Add Sub lessons</h3>;
+  }
   return (
     <div>
       <Button type="primary" style={{ marginTop: "10px", marginRight: "10px" }} onClick={onFinishSubSubLessonAdd}>
@@ -73,7 +76,9 @@ const LessonAddMaterials = ({ id, handleChangeTab }) => {
         <Select.Option value="Test">Test</Select.Option>
       </Select>
       {materialsType !== "Test" ? <h3>Name of material</h3> : <h3>Test</h3>}
-      {materialsType !== "Test" && <Input value={subInput} style={{maxWidth:440}} onChange={(e) => setSubInput(e.target.value)} />}
+      {materialsType !== "Test" && (
+        <Input value={subInput} style={{ maxWidth: 440 }} onChange={(e) => setSubInput(e.target.value)} />
+      )}
 
       <Editer handleSaveData={(value) => setData(value)} />
     </div>
