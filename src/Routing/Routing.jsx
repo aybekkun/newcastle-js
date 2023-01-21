@@ -1,12 +1,11 @@
-import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Spinner from "../components/PublicComponents/Spinner";
-import MainLayout from "../layouts/MainLayout";
-import ProtectedRoute from "./ProtectedRoute";
-import RegisterLayout from "../layouts/RegisterLayout";
 import AdminLayout from "../layouts/AdminLayout";
+import MainLayout from "../layouts/MainLayout";
+import RegisterLayout from "../layouts/RegisterLayout";
+import ProtectedRoute from "./ProtectedRoute";
 
 import Course from "../components/PublicComponents/Course";
+import AboutPage from "../pages/AboutPage";
 import AddCoursePage from "../pages/admin/AddCoursePage";
 import BillingPage from "../pages/admin/BillingPage";
 import GeneralPage from "../pages/admin/GeneralPage";
@@ -19,7 +18,6 @@ import NotFound from "../pages/NotFound";
 import PopularPage from "../pages/PopularPage";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
-import AboutPage from "../pages/AboutPage";
 // const Course = lazy(() => import("../components/PublicComponents/Course"));
 // const AddCoursePage = lazy(() => import("../pages/admin/AddCoursePage"));
 // const AboutPage = lazy(() => import("../pages/AboutPage"));
