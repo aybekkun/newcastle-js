@@ -15,7 +15,6 @@ export const configDate = {
 const LessonAddPage = () => {
   const dispatch = useDispatch();
   const { course } = useSelector((state) => state.courses);
-  console.log(course);
   const { id } = useParams();
   const [tabContent, setTabContent] = React.useState(0);
   const [openDrawer, setOpenDrawer] = React.useState(false);
