@@ -40,67 +40,18 @@ const Routing = () => {
     <>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route
-            index
-            element={
-              <Suspense fallback={<Spinner />}>
-                <HomePage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/courses"
-            element={
-              <Suspense fallback={<Spinner />}>
-                <PopularPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <Suspense fallback={<Spinner />}>
-                <AboutPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/course"
-            element={
-              <Suspense fallback={<Spinner />}>
-                <CoursePage />
-              </Suspense>
-            }
-          >
-            <Route
-              path="/course/:id/:courseId"
-              element={
-                <Suspense fallback={<Spinner />}>
-                  <Course />
-                </Suspense>
-              }
-            />
+          <Route index element={<HomePage />} />
+          <Route path="/courses" element={<PopularPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/course" element={<CoursePage />}>
+            <Route path="/course/:id/:courseId" element={<Course />} />
           </Route>
         </Route>
         <Route path="/signup" element={<RegisterLayout />}>
-          <Route
-            index
-            element={
-              <Suspense fallback={<Spinner />}>
-                <SignUp />
-              </Suspense>
-            }
-          />
+          <Route index element={<SignUp />} />
         </Route>
         <Route path="/signin" element={<RegisterLayout />}>
-          <Route
-            index
-            element={
-              <Suspense fallback={<Spinner />}>
-                <SignIn />
-              </Suspense>
-            }
-          />
+          <Route index element={<SignIn />} />
         </Route>
         <Route
           path="/admin"
@@ -110,62 +61,13 @@ const Routing = () => {
             </ProtectedRoute>
           }
         >
-          <Route
-            index
-            element={
-              <Suspense fallback={<Spinner />}>
-                <GeneralPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="settings"
-            element={
-              <Suspense fallback={<Spinner />}>
-                <SettingsPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="statistika"
-            element={
-              <Suspense fallback={<Spinner />}>
-                <StatistikaPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="billing"
-            element={
-              <Suspense fallback={<Spinner />}>
-                <BillingPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="addcourse"
-            element={
-              <Suspense fallback={<Spinner />}>
-                <AddCoursePage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="lesson"
-            element={
-              <Suspense fallback={<Spinner />}>
-                <LessonAddPage />
-              </Suspense>
-            }
-          >
-            <Route
-              path=":id"
-              element={
-                <Suspense fallback={<Spinner />}>
-                  <LessonAddPage />
-                </Suspense>
-              }
-            />
+          <Route index element={<GeneralPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="statistika" element={<StatistikaPage />} />
+          <Route path="billing" element={<BillingPage />} />
+          <Route path="addcourse" element={<AddCoursePage />} />
+          <Route path="lesson" element={<LessonAddPage />}>
+            <Route path=":id" element={<LessonAddPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
