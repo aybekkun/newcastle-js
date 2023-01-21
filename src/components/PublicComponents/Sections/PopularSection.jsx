@@ -16,16 +16,14 @@ const PopularSection = () => {
       if (pathname === "/courses") {
         await dispatch(fetchCourses({ cancelToken: cancelToken.token }));
       } else {
-        await dispatch(fetchCourses({ limit: 4, cancelToken: cancelToken.token }));
+        await dispatch(fetchCourses({ page: 1, limit: 4, cancelToken: cancelToken.token }));
       }
     })();
     return () => {
       cancelToken.cancel();
     };
-  }, []);
-  const onScroll = () => {
-    window.scrollTo(0, 0);
-  };
+  }, [pathname]);
+
   return (
     <section className="popular">
       <h3 className="popular__subtitle subtitle">ADVANCE YOUR CAREER</h3>

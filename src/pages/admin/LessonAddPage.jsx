@@ -1,7 +1,6 @@
 import { Button, Drawer, Space } from "antd";
-import axios from "axios";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import LessonAddForm from "../../components/AdminComponents/Lessons/LessonAddForm.jsx";
 import LessonAddMaterials from "../../components/AdminComponents/Lessons/LessonAddMaterials.jsx";
@@ -15,18 +14,15 @@ export const configDate = {
 
 const LessonAddPage = () => {
   const dispatch = useDispatch();
-
+  const { course } = useSelector((state) => state.courses);
+  console.log(course);
   const { id } = useParams();
   const [tabContent, setTabContent] = React.useState(0);
   const [openDrawer, setOpenDrawer] = React.useState(false);
   React.useEffect(() => {
-    const cancelToken = axios.CancelToken.source();
     (async function () {
-      await dispatch(fetchCourse({ id: id, cancelToken: cancelToken.token }));
+      await dispatch(fetchCourse({ id: id }));
     })();
-    return () => {
-      cancelToken.cancel();
-    };
   }, [id, dispatch]);
   const handleClose = () => {
     setOpenDrawer(false);

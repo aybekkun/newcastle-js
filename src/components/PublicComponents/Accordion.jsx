@@ -2,7 +2,7 @@ import React from "react";
 import cls from "classnames";
 
 import arrowIcon from "../../assets/icons/arrow.svg";
-import useActive from "../../hooks/useActive.hook";
+
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const Accordion = ({ id = 0, title = "Lesson", children }) => {
   const [active, setActive] = React.useState(false);
   const { course } = useSelector((state) => state.courses);
   const { courseId } = useParams();
-  const isMounted = React.useRef(false);
+
   React.useEffect(() => {
     if (courseId) {
       const isActive = course.lessons.find((lesson) =>

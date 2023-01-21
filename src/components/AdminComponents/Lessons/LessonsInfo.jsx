@@ -7,7 +7,8 @@ const LessonsInfo = () => {
   const { course } = useSelector((state) => state.courses);
   return (
     <div className="lesson__info">
-      {course.lessons &&
+      {course &&
+        course.lessons &&
         course.lessons.map((item) => (
           <Accordion key={item.id} title={item.name}>
             {item.sub_lessons.map((sub) => (

@@ -1,13 +1,10 @@
-import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 import Accordion from "../Accordion";
 import AccordionItem from "../AccordionItem";
 const Aside = ({ id }) => {
   const { course } = useSelector((state) => state.courses);
-  const { courseId } = useParams();
 
   return (
     <aside className="aside">

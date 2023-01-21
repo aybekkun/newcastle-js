@@ -38,3 +38,12 @@ export const createSubSubLesson = createAsyncThunk("lessons/createSubSubLesson",
         return thunkAPI.rejectWithValue("Не удалось создать lesson");
     }
 });
+
+export const createTest = createAsyncThunk("lessons/tests", async (params, thunkAPI) => {
+    try {
+        const response = await $host.post("tests", params);
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue("Не удалось создать lesson");
+    }
+});

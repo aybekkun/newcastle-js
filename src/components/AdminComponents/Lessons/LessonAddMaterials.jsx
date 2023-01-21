@@ -2,13 +2,14 @@ import { Button, Input, Select } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCourse } from "../../../redux/courses/asyncActions";
-import { createSubSubLesson } from "../../../redux/lessons/asyncActions";
+import { createSubSubLesson, createTest } from "../../../redux/lessons/asyncActions";
 import Editer from "../../Editer";
 
 const LessonAddMaterials = ({ id, handleChangeTab }) => {
   const dispatch = useDispatch();
 
   const { course } = useSelector((state) => state.courses);
+  const { isSending } = useSelector((state) => state.lessons);
 
   const [selectId, setSelectId] = React.useState(0);
   const [subSelectId, setSubSelectId] = React.useState(0);
@@ -21,6 +22,9 @@ const LessonAddMaterials = ({ id, handleChangeTab }) => {
     } else {
       console.log({ name: subInput, sub_lesson_id: subSelectId, data: data });
       await dispatch(createSubSubLesson({ name: subInput, sub_lesson_id: subSelectId, data: data }));
+      if (subInput === "Test") {
+        await dispatch(createTest({ name: subInput, sub_lesson_id: subSelectId, data: data }));
+      }
       await dispatch(fetchCourse({ id: id }));
       handleChangeTab();
     }
@@ -41,12 +45,16 @@ const LessonAddMaterials = ({ id, handleChangeTab }) => {
   const handleChangeSubSelect = (value) => {
     setSubSelectId(Number(value));
   };
-  if (course.sub_lesson_2s < 1) {
-    return <h3>Add Sub lessons</h3>;
+
   }
   return (
     <div>
-      <Button type="primary" style={{ marginTop: "10px", marginRight: "10px" }} onClick={onFinishSubSubLessonAdd}>
+      <Button
+        loading={isSending}
+        type="primary"
+        style={{ marginTop: "10px", marginRight: "10px" }}
+        onClick={onFinishSubSubLessonAdd}
+      >
         Save
       </Button>
       <h3>Select category</h3>

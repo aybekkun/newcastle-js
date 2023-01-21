@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userAuth, userCheck, userReg } from "./asyncActions";
 const initialState = {
-  user: {},
+  user: { id: 0, name: "", phone: "", role: "", students: [] },
   token: "",
   isAuth: false,
 };
@@ -26,7 +26,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(userAuth.pending, (state, action) => {});
     builder.addCase(userAuth.rejected, (state, action) => {
-      state.user = {};
+      state.user =  { id: 0, name: "", phone: "", role: "", students: [] };
       state.isAuth = false;
       window.localStorage.removeItem("token");
     });
@@ -38,7 +38,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(userReg.pending, (state, action) => {});
     builder.addCase(userReg.rejected, (state, action) => {
-      state.user = {};
+      state.user =  { id: 0, name: "", phone: "", role: "", students: [] };
       state.isAuth = false;
       window.localStorage.removeItem("token");
     });
@@ -47,7 +47,6 @@ export const authSlice = createSlice({
     });
     builder.addCase(userCheck.pending, (state, action) => {});
     builder.addCase(userCheck.rejected, (state, action) => {
-      state.user = {};
       state.isAuth = false;
       window.localStorage.removeItem("token");
     });

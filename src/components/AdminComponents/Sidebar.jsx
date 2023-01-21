@@ -1,17 +1,24 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logoImg from "../../assets/logo.png";
+import { logout } from "../../redux/auth/slice";
 import NavAccordion from "./NavAccordion";
 
 const Sidebar = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const pathname = location.pathname.split("/")[2];
-
+  const onLogout = () => {
+    if (window.confirm("Logout?")) {
+      dispatch(logout());
+    }
+  };
   return (
     <div className="sidebar">
       <div className="sidebar__inner">
         <div className="sidebar__top">
-          <Link to="/admin" className="logo">
+          <Link to="/" className="logo">
             <img src={logoImg} alt="logo" />
           </Link>
         </div>
@@ -123,7 +130,7 @@ const Sidebar = () => {
           </NavLink>
         </div>
         <div className="sidebar__bottom">
-          <Link to="/" className="sidebar__link">
+          <Link to="/" onClick={onLogout} className="sidebar__link">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M16.3135 8.0625L20.2499 12L16.3135 15.9375"

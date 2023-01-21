@@ -9,7 +9,7 @@ const Header = () => {
   const [active, setActive] = React.useState(false);
 
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.auth);
+  const { isAuth, user } = useSelector((state) => state.auth);
 
   const handleChangeActive = () => {
     setActive((prev) => !prev);
@@ -48,7 +48,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className="nav__list-item">
-                <Link to="/" onClick={handleClose} className="nav__list-link">
+                <Link to="/about" onClick={handleClose} className="nav__list-link">
                   About
                 </Link>
               </li>
@@ -62,11 +62,11 @@ const Header = () => {
                   Contact
                 </Link>
               </li>
-              <li className="nav__list-item">
+              {/*   <li className="nav__list-item">
                 <Link to="/" onClick={handleClose} className="nav__list-link">
                   Pages
                 </Link>
-              </li>
+              </li> */}
             </ul>
             <div className="header__buttons">
               {!isAuth ? (
@@ -79,9 +79,16 @@ const Header = () => {
                   </Link>
                 </>
               ) : (
-                <button onClick={onLogout} className="header__signup">
-                  Logout
-                </button>
+                <>
+                  {(user.role === "super-admin"||user.role === "admin") && (
+                    <Link to="/admin" onClick={handleClose} className="header__login">
+                      Admin
+                    </Link>
+                  )}
+                  <button onClick={onLogout} className="header__signup">
+                    Logout
+                  </button>
+                </>
               )}
             </div>
           </nav>

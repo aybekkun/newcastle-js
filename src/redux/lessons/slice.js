@@ -1,17 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMaterials} from "./asyncActions";
+import { createSubSubLesson, fetchMaterials } from "./asyncActions";
 const initialState = {
-  blocks:[],
+  blocks: [],
   lesson: {},
-  isMaterialLoading:false,
+  isMaterialLoading: false,
+  isSending: false,
 };
 
 export const coursesSlice = createSlice({
   name: "lessons",
   initialState,
-  reducers: {
-
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchMaterials.fulfilled, (state, action) => {
       state.lesson = action.payload;
@@ -25,6 +24,15 @@ export const coursesSlice = createSlice({
       state.isMaterialLoading = false;
       state.lesson = {};
       state.blocks = [];
+    });
+    builder.addCase(createSubSubLesson.fulfilled, (state, action) => {
+      state.isSending = false;
+    });
+    builder.addCase(createSubSubLesson.pending, (state, action) => {
+      state.isSending = true;
+    });
+    builder.addCase(createSubSubLesson.rejected, (state, action) => {
+      state.isSending = false;
     });
   },
 });
