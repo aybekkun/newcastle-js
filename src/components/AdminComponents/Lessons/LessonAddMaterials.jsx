@@ -45,12 +45,7 @@ const LessonAddMaterials = ({ id, handleChangeTab }) => {
   const handleChangeSubSelect = (value) => {
     setSubSelectId(Number(value));
   };
-  if (course.sub_lesson_2s.length < 1) {
-    return (
-      <>
-        <h2 style={{ marginBottom: "10px", marginTop: "10px" }}>You need add sublessons</h2>
-      </>
-    );
+
   }
   return (
     <div>
