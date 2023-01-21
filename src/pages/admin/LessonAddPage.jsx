@@ -6,6 +6,7 @@ import LessonAddForm from "../../components/AdminComponents/Lessons/LessonAddFor
 import LessonAddMaterials from "../../components/AdminComponents/Lessons/LessonAddMaterials.jsx";
 import LessonsInfo from "../../components/AdminComponents/Lessons/LessonsInfo.jsx";
 import SubLessonAddForm from "../../components/AdminComponents/Lessons/SubLessonAddForm.jsx";
+import Spinner from "../../components/PublicComponents/Spinner.jsx";
 import { fetchCourse } from "../../redux/courses/asyncActions.js";
 
 export const configDate = {
@@ -34,6 +35,9 @@ const LessonAddPage = () => {
       setOpenDrawer(false);
     }
   };
+  if (!course) {
+    return <Spinner />;
+  }
   return (
     <div className="lesson">
       <Space>
