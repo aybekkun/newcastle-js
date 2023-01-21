@@ -8,11 +8,10 @@ const ArrowButtons = () => {
   const navigate = useNavigate();
 
   const navArray = course && course.sub_lesson_2s ? course.sub_lesson_2s.map((item) => item.id) : [0];
-  const isPrevDisabled = navArray[0] == courseId || navArray[0] === 0;
-  const isNextDisabled = navArray[navArray.length - 1] == courseId || navArray[0] === 0;
-
+  const isPrevDisabled = navArray[0] == courseId || navArray[0] === 0 || navArray.length < 1;
+  const isNextDisabled = navArray[navArray.length - 1] == courseId || navArray[0] === 0 || navArray.length < 1;
+  console.log(navArray);
   const onNavigate = (num) => {
-   
     const findIndex = navArray.indexOf(Number(courseId));
     if (findIndex !== 0 || findIndex !== navArray.length - 1) {
       navigate(`/course/${id}/${navArray[findIndex + num]}`);

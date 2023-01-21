@@ -6,20 +6,34 @@ import ProtectedRoute from "./ProtectedRoute";
 import RegisterLayout from "../layouts/RegisterLayout";
 import AdminLayout from "../layouts/AdminLayout";
 
-const Course = lazy(() => import("../components/PublicComponents/Course"));
-const AddCoursePage = lazy(() => import("../pages/admin/AddCoursePage"));
-const AboutPage = lazy(() => import("../pages/AboutPage"));
-const BillingPage = lazy(() => import("../pages/admin/BillingPage"));
-const GeneralPage = lazy(() => import("../pages/admin/GeneralPage"));
-const LessonAddPage = lazy(() => import("../pages/admin/LessonAddPage"));
-const SettingsPage = lazy(() => import("../pages/admin/SettingsPage"));
-const StatistikaPage = lazy(() => import("../pages/admin/StatistikaPage"));
-const CoursePage = lazy(() => import("../pages/CoursePage"));
-const HomePage = lazy(() => import("../pages/HomePage"));
-const NotFound = lazy(() => import("../pages/NotFound"));
-const PopularPage = lazy(() => import("../pages/PopularPage"));
-const SignIn = lazy(() => import("../pages/SignIn"));
-const SignUp = lazy(() => import("../pages/SignUp"));
+import Course from "../components/PublicComponents/Course";
+import AddCoursePage from "../pages/admin/AddCoursePage";
+import BillingPage from "../pages/admin/BillingPage";
+import GeneralPage from "../pages/admin/GeneralPage";
+import LessonAddPage from "../pages/admin/LessonAddPage";
+import SettingsPage from "../pages/admin/SettingsPage";
+import StatistikaPage from "../pages/admin/StatistikaPage";
+import CoursePage from "../pages/CoursePage";
+import HomePage from "../pages/HomePage";
+import NotFound from "../pages/NotFound";
+import PopularPage from "../pages/PopularPage";
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
+import AboutPage from "../pages/AboutPage";
+// const Course = lazy(() => import("../components/PublicComponents/Course"));
+// const AddCoursePage = lazy(() => import("../pages/admin/AddCoursePage"));
+// const AboutPage = lazy(() => import("../pages/AboutPage"));
+// const BillingPage = lazy(() => import("../pages/admin/BillingPage"));
+// const GeneralPage = lazy(() => import("../pages/admin/GeneralPage"));
+// const LessonAddPage = lazy(() => import("../pages/admin/LessonAddPage"));
+// const SettingsPage = lazy(() => import("../pages/admin/SettingsPage"));
+// const StatistikaPage = lazy(() => import("../pages/admin/StatistikaPage"));
+// const CoursePage = lazy(() => import("../pages/CoursePage"));
+// const HomePage = lazy(() => import("../pages/HomePage"));
+// const NotFound = lazy(() => import("../pages/NotFound"));
+// const PopularPage = lazy(() => import("../pages/PopularPage"));
+// const SignIn = lazy(() => import("../pages/SignIn"));
+// const SignUp = lazy(() => import("../pages/SignUp"));
 
 const Routing = () => {
   return (
@@ -153,6 +167,7 @@ const Routing = () => {
               }
             />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
