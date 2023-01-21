@@ -1,5 +1,4 @@
 import { Button, Drawer, Space } from "antd";
-import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -38,7 +37,7 @@ const LessonAddPage = () => {
   };
   return (
     <div className="lesson">
-      <Space>
+   {/*    <Space>
         <Button onClick={() => onClickBtns(1)}>Add lesson</Button>
         <Button onClick={() => onClickBtns(2)}>Add subLesson</Button>
         <Button onClick={() => onClickBtns(3)}>Add materials</Button>
@@ -56,9 +55,9 @@ const LessonAddPage = () => {
         onClose={handleClose}
         open={openDrawer && tabContent !== 3}
       >
-        {tabContent === 1 && course ? <LessonAddForm id={id} handleClose={handleClose} /> : <h2>Loading..</h2>}
-        {tabContent === 2 && course ? <SubLessonAddForm id={id} handleClose={handleClose} /> : <h2>Loading..</h2>}
-      </Drawer>
+        {tabContent === 1 && <LessonAddForm id={id} handleClose={handleClose} />}
+        {tabContent === 2 && <SubLessonAddForm id={id} handleClose={handleClose} />}
+      </Drawer> */}
     </div>
   );
 };
