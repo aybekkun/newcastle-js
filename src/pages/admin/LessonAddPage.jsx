@@ -37,17 +37,13 @@ const LessonAddPage = () => {
   };
   return (
     <div className="lesson">
-   {/*    <Space>
+      <Space>
         <Button onClick={() => onClickBtns(1)}>Add lesson</Button>
         <Button onClick={() => onClickBtns(2)}>Add subLesson</Button>
         <Button onClick={() => onClickBtns(3)}>Add materials</Button>
       </Space>
-      {tabContent !== 3 && course ? <LessonsInfo /> : <h2>Loading..</h2>}
-      {tabContent === 3 && course ? (
-        <LessonAddMaterials handleChangeTab={() => setTabContent(1)} id={id} />
-      ) : (
-        <h2>Loading..</h2>
-      )}
+      {tabContent !== 3 && <LessonsInfo />}
+      {tabContent === 3 && <LessonAddMaterials handleChangeTab={() => setTabContent(1)} id={id} />}
       <Drawer
         title={`Add`}
         placement={"right"}
@@ -57,7 +53,7 @@ const LessonAddPage = () => {
       >
         {tabContent === 1 && <LessonAddForm id={id} handleClose={handleClose} />}
         {tabContent === 2 && <SubLessonAddForm id={id} handleClose={handleClose} />}
-      </Drawer> */}
+      </Drawer>
     </div>
   );
 };

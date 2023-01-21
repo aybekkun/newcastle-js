@@ -22,7 +22,7 @@ const LessonAddMaterials = ({ id, handleChangeTab }) => {
     } else {
       console.log({ name: subInput, sub_lesson_id: subSelectId, data: data });
       await dispatch(createSubSubLesson({ name: subInput, sub_lesson_id: subSelectId, data: data }));
-      if(subInput==="Test"){
+      if (subInput === "Test") {
         await dispatch(createTest({ name: subInput, sub_lesson_id: subSelectId, data: data }));
       }
       await dispatch(fetchCourse({ id: id }));
@@ -45,6 +45,13 @@ const LessonAddMaterials = ({ id, handleChangeTab }) => {
   const handleChangeSubSelect = (value) => {
     setSubSelectId(Number(value));
   };
+  if (course.sub_lesson_2s.length < 1) {
+    return (
+      <>
+        <h2 style={{ marginBottom: "10px", marginTop: "10px" }}>You need add sublessons</h2>
+      </>
+    );
+  }
   return (
     <div>
       <Button
